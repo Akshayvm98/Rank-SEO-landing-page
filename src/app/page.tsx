@@ -10,10 +10,14 @@ import { Testimonials } from "@/components/Testimonials";
 import { Pricing } from "@/components/Pricing";
 import { FAQ } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
+import { OrganizationJsonLd, FAQJsonLd, ProductJsonLd } from "@/components/JsonLd";
 
 export default function Home() {
   return (
     <>
+      <OrganizationJsonLd />
+      <FAQJsonLd />
+      <ProductJsonLd />
       <Navbar />
       <main>
         <Hero />
