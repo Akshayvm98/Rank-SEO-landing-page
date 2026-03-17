@@ -56,7 +56,7 @@ export function Navbar() {
             href="#pricing"
             className="rounded-lg bg-foreground px-4 py-2 text-[14px] font-medium text-white transition-all duration-200 hover:bg-foreground/90 hover:shadow-md"
           >
-            Get Early Access
+            Get Started
           </a>
         </div>
 
@@ -97,7 +97,7 @@ export function Navbar() {
               onClick={() => setMobileOpen(false)}
               className="mt-1 rounded-lg bg-foreground px-3 py-2.5 text-center text-[15px] font-medium text-white"
             >
-              Get Early Access
+              Get Started
             </a>
           </div>
         </div>

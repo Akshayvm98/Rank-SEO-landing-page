@@ -8,14 +8,7 @@ export function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           {/* Left: Copy */}
           <div>
-            <div className="animate-hero mb-6 inline-flex items-center gap-2 rounded-full border border-accent-muted/50 bg-accent-bg/60 px-3.5 py-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              <span className="text-[13px] font-medium text-accent">
-                AI-powered SEO automation
-              </span>
-            </div>
-
-            <h1 className="animate-hero-delay-1 text-[2.5rem] font-bold leading-[1.1] tracking-[-0.03em] text-foreground md:text-[3.25rem] lg:text-[3.5rem]">
+            <h1 className="animate-hero text-[2.5rem] font-bold leading-[1.1] tracking-[-0.03em] text-foreground md:text-[3.25rem] lg:text-[3.5rem]">
               Turn your website into a traffic engine that{" "}
               <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
                 grows itself
@@ -33,7 +26,7 @@ export function Hero() {
                 href="#pricing"
                 className="inline-flex h-11 items-center rounded-lg bg-foreground px-6 text-[14px] font-semibold text-white transition-all duration-200 hover:bg-foreground/90 hover:shadow-lg hover:shadow-foreground/10"
               >
-                Start free
+                Get Started
               </a>
               <a
                 href="#workflow"
@@ -47,7 +40,7 @@ export function Hero() {
             </div>
 
             <p className="animate-hero-delay-4 mt-5 text-[13px] text-muted-light">
-              Trusted by 100+ high-growth brands. No credit card required.
+              Trusted by 100+ high-growth brands.
             </p>
           </div>
 
