@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const siteUrl = "https://rank-seo-landing-page.vercel.app";
+const siteUrl = "https://rankseoengine.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

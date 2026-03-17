@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /api/
 
-Sitemap: https://rank-seo-landing-page.vercel.app/sitemap.xml
+Sitemap: https://rankseoengine.com/sitemap.xml
