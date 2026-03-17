@@ -18,7 +18,7 @@ const footerLinks = [
   {
     title: "Resources",
     links: [
-      { label: "SEO Guides", href: "#" },
+      { label: "SEO Guides", href: "/seo-guide" },
       { label: "Help Center", href: "#" },
       { label: "Documentation", href: "#" },
     ],
