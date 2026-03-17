@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const features = [
   "Generate up to 30 SEO articles per month",
   "Automatic keyword research (Search Console + Google Ads + SERP)",
@@ -98,10 +94,8 @@ const trustSignals = [
 ];
 
 export function Pricing() {
-  const ref = useReveal();
-
   return (
-    <section id="pricing" ref={ref} className="py-20 md:py-28">
+    <section id="pricing" className="py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         {/* ── Header ── */}
         <div className="reveal mx-auto mb-14 max-w-[560px] text-center">

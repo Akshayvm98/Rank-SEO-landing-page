@@ -1,12 +1,6 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 export function SEOProsCTA() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="py-20 md:py-28">
+    <section className="py-20 md:py-28">
       <div className="mx-auto max-w-[720px] px-6">
         <div className="reveal rounded-2xl border border-border-light bg-white p-10 text-center md:p-14">
           <h2 className="text-[1.75rem] font-bold leading-tight tracking-[-0.02em] text-foreground md:text-[2.25rem]">

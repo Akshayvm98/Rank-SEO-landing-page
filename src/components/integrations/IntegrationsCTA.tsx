@@ -1,12 +1,6 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 export function IntegrationsCTA() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="py-20 md:py-28">
+    <section className="py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="reveal relative overflow-hidden rounded-3xl bg-foreground px-8 py-16 text-center md:px-16 md:py-20">
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent/15 via-transparent to-accent-light/10" />

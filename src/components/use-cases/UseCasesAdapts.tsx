@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const examples = [
   {
     persona: "For founders",
@@ -18,10 +14,8 @@ const examples = [
 ];
 
 export function UseCasesAdapts() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="bg-gradient-to-b from-border-light/40 to-transparent py-20 md:py-28">
+    <section className="bg-gradient-to-b from-border-light/40 to-transparent py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="reveal mx-auto max-w-[680px]">
           <h2 className="text-center text-[1.875rem] font-bold tracking-[-0.03em] text-foreground md:text-[2.5rem]">

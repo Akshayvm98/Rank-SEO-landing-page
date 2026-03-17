@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const metrics = [
   { value: "20%+", label: "Growth in organic impressions" },
   { value: "<15 min", label: "To first optimized article" },
@@ -10,10 +6,8 @@ const metrics = [
 ];
 
 export function TrustMetrics() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="bg-gradient-to-b from-accent-bg/20 to-transparent py-20 md:py-24">
+    <section className="bg-gradient-to-b from-accent-bg/20 to-transparent py-20 md:py-24">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="reveal text-center mb-12">
           <p className="text-[13px] font-medium uppercase tracking-[0.08em] text-muted-light mb-2">

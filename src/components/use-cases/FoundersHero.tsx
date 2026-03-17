@@ -1,12 +1,6 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 export function FoundersHero() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32 lg:pt-44">
+    <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32 lg:pt-44">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-accent-bg/30 via-transparent to-transparent" />
 
       <div className="relative mx-auto max-w-[640px] px-6 text-center">

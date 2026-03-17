@@ -1,18 +1,10 @@
-"use client";
-
 import Image from "next/image";
-import { useReveal } from "@/hooks/useReveal";
-
 export function About() {
-  const storyRef = useReveal();
-  const philosophyRef = useReveal();
-  const founderRef = useReveal();
-
   return (
     <section className="py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         {/* ── Story ── */}
-        <div ref={storyRef} className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <div>
             <p className="reveal mb-3 text-[13px] font-medium uppercase tracking-[0.08em] text-accent">
               Our Story
@@ -44,7 +36,6 @@ export function About() {
 
         {/* ── Philosophy ── */}
         <div
-          ref={philosophyRef}
           className="mt-28 md:mt-36"
         >
           <div className="reveal relative overflow-hidden rounded-3xl border border-border-light bg-gradient-to-br from-accent-bg/60 via-white to-white px-8 py-16 md:px-16 md:py-20">
@@ -74,7 +65,6 @@ export function About() {
 
         {/* ── Founder ── */}
         <div
-          ref={founderRef}
           className="mt-28 grid items-center gap-12 md:mt-36 lg:grid-cols-[auto_1fr] lg:gap-20"
         >
           <div className="reveal mx-auto w-full max-w-[340px] lg:mx-0">

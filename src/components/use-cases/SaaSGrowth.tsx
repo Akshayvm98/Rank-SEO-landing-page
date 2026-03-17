@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const outcomes = [
   "Clearer priorities for what to create and when",
   "More consistent output without relying on heroics",
@@ -10,10 +6,8 @@ const outcomes = [
 ];
 
 export function SaaSGrowth() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="border-t border-border-light py-20 md:py-28">
+    <section className="border-t border-border-light py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="reveal mx-auto max-w-[600px] text-center">
           <h2 className="text-[1.875rem] font-bold leading-tight tracking-[-0.03em] text-foreground md:text-[2.25rem]">

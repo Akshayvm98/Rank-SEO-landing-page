@@ -1,12 +1,6 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 export function SaaSWhyStalls() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="bg-gradient-to-b from-border-light/20 to-transparent py-20 md:py-28">
+    <section className="bg-gradient-to-b from-border-light/20 to-transparent py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="reveal mx-auto max-w-[640px] text-center">
           <h2 className="text-[1.875rem] font-bold leading-tight tracking-[-0.03em] text-foreground md:text-[2.25rem]">

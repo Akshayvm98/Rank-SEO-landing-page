@@ -105,51 +105,6 @@ body {
   animation: hero-enter 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.48s both;
 }
 
-/* Integrations hero node animations */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-@keyframes node-enter {
-  from {
-    opacity: 0;
-    transform: scale(0.8) translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-@keyframes connect-line {
-  from { stroke-dashoffset: 100; }
-  to { stroke-dashoffset: 0; }
-}
-
-.integration-node {
-  animation: node-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) both,
-             float 5s ease-in-out infinite;
-}
-
-.integration-node-1 { animation-delay: 0.1s, 0.1s; }
-.integration-node-2 { animation-delay: 0.2s, 0.7s; }
-.integration-node-3 { animation-delay: 0.3s, 1.3s; }
-.integration-node-4 { animation-delay: 0.4s, 1.9s; }
-.integration-node-5 { animation-delay: 0.5s, 0.4s; }
-.integration-node-6 { animation-delay: 0.6s, 1.0s; }
-
-.connect-line {
-  stroke-dasharray: 100;
-  animation: connect-line 1s ease-out both;
-}
-
-.connect-line-1 { animation-delay: 0.3s; }
-.connect-line-2 { animation-delay: 0.4s; }
-.connect-line-3 { animation-delay: 0.5s; }
-.connect-line-4 { animation-delay: 0.6s; }
-.connect-line-5 { animation-delay: 0.7s; }
-.connect-line-6 { animation-delay: 0.8s; }
 
 /* Premium grid background pattern */
 .bg-grid {

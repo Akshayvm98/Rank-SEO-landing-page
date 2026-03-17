@@ -11,9 +11,9 @@ export function Hero() {
           {/* Left: Copy */}
           <div>
             <h1 className="animate-hero text-[2.75rem] font-bold leading-[1.05] tracking-[-0.035em] text-foreground md:text-[3.75rem] lg:text-[4.25rem]">
-              Turn your website into a traffic engine that{" "}
+              Build an organic growth engine that{" "}
               <span className="bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
-                grows itself
+                runs itself
               </span>
             </h1>
 

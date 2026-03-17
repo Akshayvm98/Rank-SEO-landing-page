@@ -1,14 +1,8 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const brands = ["Nova Labs", "Craftly", "Brightpath", "Atlas Studio", "PixelForge", "Growthlane"];
 
 export function LogoStrip() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="border-y border-border-light py-10">
+    <section className="border-y border-border-light py-10">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="reveal flex flex-col items-center gap-8">
           <p className="text-[13px] font-medium uppercase tracking-[0.08em] text-muted-light">

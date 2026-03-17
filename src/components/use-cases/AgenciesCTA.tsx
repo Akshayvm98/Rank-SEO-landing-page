@@ -1,12 +1,6 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 export function AgenciesCTA() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="py-20 md:py-28">
+    <section className="py-20 md:py-28">
       <div className="mx-auto max-w-[700px] px-6 text-center">
         <h2 className="reveal text-[1.875rem] font-bold leading-tight tracking-[-0.03em] text-foreground md:text-[2.25rem]">
           Build a cleaner SEO workflow for every client you manage

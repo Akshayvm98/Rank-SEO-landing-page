@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const challenges = [
   {
     challenge: "Finding time for SEO",
@@ -36,10 +32,8 @@ const challenges = [
 ];
 
 export function UseCasesSelector() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="py-20 md:py-28">
+    <section className="py-20 md:py-28">
       <div className="mx-auto max-w-[800px] px-6">
         <div className="reveal mb-10 text-center">
           <h2 className="text-[1.875rem] font-bold tracking-[-0.03em] text-foreground md:text-[2.5rem]">

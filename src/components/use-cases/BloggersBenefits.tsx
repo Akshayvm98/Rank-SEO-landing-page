@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const benefits = [
   {
     title: "Clearer direction on what to write next",
@@ -26,10 +22,8 @@ const benefits = [
 ];
 
 export function BloggersBenefits() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="py-20 md:py-28">
+    <section className="py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         <h2 className="reveal text-center text-[1.875rem] font-bold tracking-[-0.03em] text-foreground md:text-[2.25rem]">
           Built for consistency, not just content output

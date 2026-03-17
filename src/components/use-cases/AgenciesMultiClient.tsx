@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const blocks = [
   {
     title: "Multiple websites and workspaces",
@@ -132,10 +128,8 @@ const blocks = [
 ];
 
 export function AgenciesMultiClient() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="py-16 md:py-24">
+    <section className="py-16 md:py-24">
       <div className="mx-auto max-w-[960px] px-6">
         <h2 className="reveal text-center text-[1.5rem] font-bold tracking-[-0.02em] text-foreground md:text-[2rem]">
           Built for client delivery, not just single-site SEO

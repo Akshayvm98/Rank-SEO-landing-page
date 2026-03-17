@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const cards = [
   {
     title: "Connect your real search data",
@@ -39,10 +35,8 @@ const cards = [
 ];
 
 export function HowItWorks() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="border-t border-border-light py-20 md:py-28">
+    <section className="border-t border-border-light py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="reveal mx-auto mb-14 max-w-[560px] text-center">
           <h2 className="text-[1.875rem] font-bold tracking-[-0.03em] text-foreground md:text-[2.5rem]">

@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const features = [
   {
     title: "Keyword Opportunity",
@@ -79,10 +75,8 @@ const features = [
 ];
 
 export function FeatureGrid() {
-  const ref = useReveal();
-
   return (
-    <section id="features" ref={ref} className="bg-gradient-to-b from-border-light/40 to-transparent py-20 md:py-28">
+    <section id="features" className="bg-gradient-to-b from-border-light/40 to-transparent py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="reveal mx-auto mb-14 max-w-[560px] text-center">
           <h2 className="text-[1.875rem] font-bold tracking-[-0.03em] text-foreground md:text-[2.5rem]">

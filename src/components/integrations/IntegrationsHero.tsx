@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const nodes = [
   { label: "Search Console", x: "28%", y: "2%", color: "#4285F4", cx: 150, cy: 30 },
   { label: "WordPress", x: "72%", y: "8%", color: "#21759B", cx: 330, cy: 55 },
@@ -13,11 +9,23 @@ const nodes = [
 
 const hubCenter = { cx: 200, cy: 190 };
 
-export function IntegrationsHero() {
-  const ref = useReveal();
+const integrationStyles = `
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes node-enter{from{opacity:0;transform:scale(.8) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes connect-line{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+.integration-node{animation:node-enter .6s cubic-bezier(.16,1,.3,1) both,float 5s ease-in-out infinite}
+.integration-node-1{animation-delay:.1s,.1s}.integration-node-2{animation-delay:.2s,.7s}
+.integration-node-3{animation-delay:.3s,1.3s}.integration-node-4{animation-delay:.4s,1.9s}
+.integration-node-5{animation-delay:.5s,.4s}.integration-node-6{animation-delay:.6s,1s}
+.connect-line{stroke-dasharray:100;animation:connect-line 1s ease-out both}
+.connect-line-1{animation-delay:.3s}.connect-line-2{animation-delay:.4s}
+.connect-line-3{animation-delay:.5s}.connect-line-4{animation-delay:.6s}
+.connect-line-5{animation-delay:.7s}.connect-line-6{animation-delay:.8s}`;
 
+export function IntegrationsHero() {
   return (
-    <section ref={ref} className="relative overflow-hidden pt-28 pb-20 md:pt-36 md:pb-28 lg:pt-40">
+    <section className="relative overflow-hidden pt-28 pb-20 md:pt-36 md:pb-28 lg:pt-40">
+      <style dangerouslySetInnerHTML={{ __html: integrationStyles }} />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-accent-bg/40 via-transparent to-transparent" />
 
       <div className="relative mx-auto max-w-[1200px] px-6">

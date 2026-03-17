@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const steps = [
   {
     number: "01",
@@ -278,10 +274,8 @@ const steps = [
 ];
 
 export function SaaSWorkflow() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="border-t border-border-light py-20 md:py-28">
+    <section className="border-t border-border-light py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         <h2 className="reveal text-center text-[1.875rem] font-bold tracking-[-0.03em] text-foreground md:text-[2.25rem]">
           How SaaS teams use RankSEO

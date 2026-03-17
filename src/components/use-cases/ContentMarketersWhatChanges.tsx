@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const beforeItems = [
   { label: "Scattered tasks across 5+ tools", icon: "M6 18L18 6M6 6l12 12" },
   { label: "Manual keyword research in spreadsheets", icon: "M6 18L18 6M6 6l12 12" },
@@ -17,10 +13,8 @@ const afterItems = [
 ];
 
 export function ContentMarketersWhatChanges() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="border-t border-border-light bg-gradient-to-b from-border-light/20 to-transparent py-20 md:py-28">
+    <section className="border-t border-border-light bg-gradient-to-b from-border-light/20 to-transparent py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="mx-auto max-w-[640px] text-center">
           <h2 className="reveal text-[1.875rem] font-bold leading-tight tracking-[-0.03em] text-foreground md:text-[2.25rem]">

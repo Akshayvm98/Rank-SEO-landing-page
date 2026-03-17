@@ -1,12 +1,6 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 export function UseCasesCTA() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="py-20 md:py-28">
+    <section className="py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="reveal mx-auto max-w-[600px] rounded-2xl border border-border-light bg-accent-bg/20 px-8 py-14 text-center md:px-12">
           <h2 className="reveal reveal-delay-1 text-[1.875rem] font-bold tracking-[-0.03em] text-foreground md:text-[2.25rem]">

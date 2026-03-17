@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const clients = [
   { domain: "acme.com", active: true },
   { domain: "greenleaf.io", active: false },
@@ -24,10 +20,8 @@ const teamAvatars = [
 ];
 
 export function AgenciesHero() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="relative overflow-hidden pt-28 pb-20 md:pt-36 md:pb-28 lg:pt-40">
+    <section className="relative overflow-hidden pt-28 pb-20 md:pt-36 md:pb-28 lg:pt-40">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-accent-bg/40 via-transparent to-transparent" />
 
       <div className="relative mx-auto max-w-[1100px] px-6">

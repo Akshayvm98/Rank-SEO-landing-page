@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const withoutItems = [
   "Manual research per client",
   "Scattered drafts and approvals",
@@ -19,10 +15,8 @@ const withItems = [
 ];
 
 export function AgenciesOutcomes() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="border-t border-border-light bg-gradient-to-b from-border-light/20 to-transparent py-16 md:py-24">
+    <section className="border-t border-border-light bg-gradient-to-b from-border-light/20 to-transparent py-16 md:py-24">
       <div className="mx-auto max-w-[800px] px-6">
         <h2 className="reveal text-center text-[1.5rem] font-bold tracking-[-0.02em] text-foreground md:text-[2rem]">
           What changes when your workflow scales with your client list

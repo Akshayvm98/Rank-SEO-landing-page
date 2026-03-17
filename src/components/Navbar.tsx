@@ -1,14 +1,14 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 const useCases = [
-  { label: "Founders", href: "/use-cases/founders" },
-  { label: "Content Marketers", href: "/use-cases/content-marketers" },
-  { label: "SEO Professionals", href: "/use-cases/seo-professionals" },
-  { label: "Agencies", href: "/use-cases/agencies" },
-  { label: "Bloggers", href: "/use-cases/bloggers" },
-  { label: "SaaS Teams", href: "/use-cases/saas" },
+  { label: "Founders", desc: "Grow traffic without hiring an SEO team", href: "/use-cases/founders" },
+  { label: "Content Marketers", desc: "Scale content without manual workflows", href: "/use-cases/content-marketers" },
+  { label: "SEO Professionals", desc: "Automate execution, keep control", href: "/use-cases/seo-professionals" },
+  { label: "Agencies", desc: "Manage SEO across multiple clients", href: "/use-cases/agencies" },
+  { label: "Bloggers", desc: "Stop guessing what to write", href: "/use-cases/bloggers" },
+  { label: "SaaS Teams", desc: "Build a predictable growth engine", href: "/use-cases/saas" },
 ];
 
 const navLinks = [
@@ -24,6 +24,12 @@ export function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileUseCasesOpen, setMobileUseCasesOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const hoverTimeout = useRef<ReturnType<typeof setTimeout>>(null);
+  const canHover = useRef(false);
+
+  useEffect(() => {
+    canHover.current = window.matchMedia("(hover: hover)").matches;
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -40,6 +46,24 @@ export function Navbar() {
     }
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  // Close on Escape
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setDropdownOpen(false);
+    }
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, []);
+
+  const openDropdown = useCallback(() => {
+    if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
+    setDropdownOpen(true);
+  }, []);
+
+  const closeDropdown = useCallback(() => {
+    hoverTimeout.current = setTimeout(() => setDropdownOpen(false), 150);
   }, []);
 
   return (
@@ -65,9 +89,23 @@ export function Navbar() {
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) =>
             link.dropdown ? (
-              <div key={link.label} ref={dropdownRef} className="relative">
+              <div
+                key={link.label}
+                ref={dropdownRef}
+                className="relative"
+                onMouseEnter={() => canHover.current && openDropdown()}
+                onMouseLeave={() => canHover.current && closeDropdown()}
+                onFocusCapture={openDropdown}
+                onBlurCapture={(e) => {
+                  if (!dropdownRef.current?.contains(e.relatedTarget as Node)) {
+                    setDropdownOpen(false);
+                  }
+                }}
+              >
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
+                  aria-expanded={dropdownOpen}
+                  aria-haspopup="true"
                   className="flex items-center gap-1 text-[14px] font-medium text-muted transition-colors duration-200 hover:text-foreground"
                 >
                   {link.label}
@@ -82,21 +120,46 @@ export function Navbar() {
                   </svg>
                 </button>
 
-                {/* Dropdown */}
-                {dropdownOpen && (
-                  <div className="absolute left-1/2 top-full z-50 mt-2 w-[200px] -translate-x-1/2 rounded-xl border border-border-light bg-white py-1.5 shadow-lg shadow-black/5">
+                {/* Mega menu — outer wrapper with invisible hover bridge */}
+                <div
+                  className={`absolute left-1/2 top-full z-50 w-[480px] -translate-x-1/2 pt-3 transition-all duration-200 origin-top ${
+                    dropdownOpen
+                      ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                      : "opacity-0 scale-[0.97] -translate-y-1 pointer-events-none"
+                  }`}
+                >
+                  <div className="rounded-2xl border border-border-light bg-white p-2 shadow-xl shadow-black/[0.06]">
+                  <div className="grid grid-cols-2 gap-0.5">
                     {useCases.map((item) => (
                       <a
                         key={item.label}
                         href={item.href}
                         onClick={() => setDropdownOpen(false)}
-                        className="block px-4 py-2 text-[13px] font-medium text-muted transition-colors duration-150 hover:bg-border-light/60 hover:text-foreground"
+                        className="group rounded-xl px-4 py-3.5 transition-colors duration-150 hover:bg-border-light/60"
                       >
-                        {item.label}
+                        <span className="block text-[14px] font-semibold text-foreground">
+                          {item.label}
+                        </span>
+                        <span className="mt-0.5 block text-[13px] leading-[1.5] text-muted-light transition-colors duration-150 group-hover:text-muted">
+                          {item.desc}
+                        </span>
                       </a>
                     ))}
                   </div>
-                )}
+                  <div className="mt-1 border-t border-border-light pt-1">
+                    <a
+                      href="/use-cases"
+                      onClick={() => setDropdownOpen(false)}
+                      className="flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-[13px] font-medium text-muted transition-colors duration-150 hover:bg-border-light/60 hover:text-foreground"
+                    >
+                      View all use cases
+                      <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                      </svg>
+                    </a>
+                  </div>
+                  </div>
+                </div>
               </div>
             ) : (
               <a
@@ -161,7 +224,7 @@ export function Navbar() {
                     </svg>
                   </button>
                   {mobileUseCasesOpen && (
-                    <div className="ml-3 border-l border-border-light pl-3">
+                    <div className="ml-1 mt-1 space-y-0.5 border-l border-border-light pl-3">
                       {useCases.map((item) => (
                         <a
                           key={item.label}
@@ -170,11 +233,29 @@ export function Navbar() {
                             setMobileOpen(false);
                             setMobileUseCasesOpen(false);
                           }}
-                          className="block rounded-lg px-3 py-2 text-[14px] text-muted transition-colors hover:bg-border-light hover:text-foreground"
+                          className="block rounded-lg px-3 py-2.5 transition-colors hover:bg-border-light"
                         >
-                          {item.label}
+                          <span className="block text-[14px] font-medium text-foreground">
+                            {item.label}
+                          </span>
+                          <span className="block text-[12px] leading-[1.5] text-muted-light">
+                            {item.desc}
+                          </span>
                         </a>
                       ))}
+                      <a
+                        href="/use-cases"
+                        onClick={() => {
+                          setMobileOpen(false);
+                          setMobileUseCasesOpen(false);
+                        }}
+                        className="flex items-center gap-1 rounded-lg px-3 py-2 text-[13px] font-medium text-muted transition-colors hover:text-foreground"
+                      >
+                        View all use cases
+                        <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                      </a>
                     </div>
                   )}
                 </div>

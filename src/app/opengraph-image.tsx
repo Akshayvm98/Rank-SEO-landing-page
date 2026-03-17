@@ -70,7 +70,7 @@ export default function OGImage() {
             marginBottom: "20px",
           }}
         >
-          Turn your website into a traffic engine
+          Build an organic growth engine that runs itself
         </div>
 
         {/* Subline */}

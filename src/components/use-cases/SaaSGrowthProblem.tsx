@@ -1,12 +1,6 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 export function SaaSGrowthProblem() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="border-t border-border-light py-20 md:py-28">
+    <section className="border-t border-border-light py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left: Copy */}

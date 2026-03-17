@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useReveal } from "@/hooks/useReveal";
-
 const faqs = [
   {
     question: "Which integrations does RankSEO support?",
@@ -32,10 +30,8 @@ const faqs = [
 ];
 
 export function IntegrationsFAQ() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="py-20 md:py-28">
+    <section className="py-20 md:py-28">
       <div className="mx-auto max-w-[720px] px-6">
         <h2 className="reveal mb-12 text-center text-[1.5rem] font-bold tracking-[-0.02em] text-foreground md:text-[1.875rem]">
           Frequently asked questions about integrations

@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useReveal } from "@/hooks/useReveal";
-
 /* ────────────────────────────────────────────
    Data
    ──────────────────────────────────────────── */
@@ -100,17 +98,10 @@ const billingFaqs = [
    ──────────────────────────────────────────── */
 
 export function PricingPage() {
-  const heroRef = useReveal();
-  const cardRef = useReveal();
-  const valueRef = useReveal();
-  const trialRef = useReveal();
-  const faqRef = useReveal();
-  const ctaRef = useReveal();
-
   return (
     <div className="pt-28 md:pt-36">
       {/* ── 1. Hero ── */}
-      <section ref={heroRef} className="pb-16 md:pb-20">
+      <section className="pb-16 md:pb-20">
         <div className="mx-auto max-w-[600px] px-6 text-center">
           <h1 className="reveal text-[2.25rem] font-bold leading-[1.1] tracking-[-0.03em] text-foreground md:text-[3rem]">
             Simple pricing.{" "}
@@ -128,7 +119,7 @@ export function PricingPage() {
       </section>
 
       {/* ── 2. Pricing Card ── */}
-      <section ref={cardRef} className="pb-20 md:pb-28">
+      <section className="pb-20 md:pb-28">
         <div className="mx-auto max-w-[500px] px-6">
           <div className="reveal relative rounded-2xl border border-accent/20 bg-white p-8 shadow-[0_8px_48px_-12px_rgba(13,148,136,0.14)] md:p-10">
             {/* Trial badge */}
@@ -183,7 +174,7 @@ export function PricingPage() {
       </section>
 
       {/* ── 3. Value Breakdown ── */}
-      <section ref={valueRef} className="border-t border-border-light bg-gradient-to-b from-border-light/30 to-transparent py-20 md:py-28">
+      <section className="border-t border-border-light bg-gradient-to-b from-border-light/30 to-transparent py-20 md:py-28">
         <div className="mx-auto max-w-[1200px] px-6">
           <h2 className="reveal mb-14 text-center text-[1.5rem] font-bold tracking-[-0.02em] text-foreground md:text-[1.875rem]">
             Everything you need to grow organic traffic
@@ -212,7 +203,7 @@ export function PricingPage() {
       </section>
 
       {/* ── 4. Trial Explanation ── */}
-      <section ref={trialRef} className="py-20 md:py-28">
+      <section className="py-20 md:py-28">
         <div className="mx-auto max-w-[1200px] px-6">
           <h2 className="reveal mb-14 text-center text-[1.5rem] font-bold tracking-[-0.02em] text-foreground md:text-[1.875rem]">
             How the $1 trial works
@@ -247,7 +238,7 @@ export function PricingPage() {
       </section>
 
       {/* ── 5. FAQ ── */}
-      <section ref={faqRef} className="border-t border-border-light bg-gradient-to-b from-border-light/20 to-transparent py-20 md:py-28">
+      <section className="border-t border-border-light bg-gradient-to-b from-border-light/20 to-transparent py-20 md:py-28">
         <div className="mx-auto max-w-[720px] px-6">
           <h2 className="reveal mb-12 text-center text-[1.5rem] font-bold tracking-[-0.02em] text-foreground md:text-[1.875rem]">
             Questions about pricing
@@ -262,7 +253,7 @@ export function PricingPage() {
       </section>
 
       {/* ── 6. Final CTA ── */}
-      <section ref={ctaRef} className="py-20 md:py-28">
+      <section className="py-20 md:py-28">
         <div className="mx-auto max-w-[1200px] px-6">
           <div className="reveal relative overflow-hidden rounded-3xl bg-foreground px-8 py-16 text-center md:px-16 md:py-20">
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent/15 via-transparent to-accent-light/10" />

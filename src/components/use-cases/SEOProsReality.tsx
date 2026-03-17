@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const stages = [
   { label: "Research", icon: "M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" },
   { label: "Draft", icon: "M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" },
@@ -11,10 +7,8 @@ const stages = [
 ];
 
 export function SEOProsReality() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="border-t border-border-light bg-gradient-to-b from-border-light/20 to-transparent py-16 md:py-24">
+    <section className="border-t border-border-light bg-gradient-to-b from-border-light/20 to-transparent py-16 md:py-24">
       <div className="mx-auto max-w-[1000px] px-6">
         <div className="grid gap-10 md:grid-cols-[1.1fr_1fr] md:gap-16 md:items-center">
           {/* Left: Copy */}

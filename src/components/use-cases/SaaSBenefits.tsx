@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const benefits = [
   {
     title: "Build a more repeatable organic acquisition process",
@@ -68,10 +64,8 @@ const benefits = [
 ];
 
 export function SaaSBenefits() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="bg-gradient-to-b from-border-light/20 to-transparent py-20 md:py-28">
+    <section className="bg-gradient-to-b from-border-light/20 to-transparent py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         <h2 className="reveal text-center text-[1.875rem] font-bold tracking-[-0.03em] text-foreground md:text-[2.25rem]">
           Built for teams that want SEO to become a real growth channel

@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const steps = [
   {
     number: "01",
@@ -137,10 +133,8 @@ const steps = [
 ];
 
 export function WorkflowSection() {
-  const ref = useReveal();
-
   return (
-    <section id="workflow" ref={ref} className="border-t border-border-light py-20 md:py-28">
+    <section id="workflow" className="border-t border-border-light py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="reveal mx-auto mb-16 max-w-[560px] text-center">
           <h2 className="text-[1.875rem] font-bold tracking-[-0.03em] text-foreground md:text-[2.5rem]">

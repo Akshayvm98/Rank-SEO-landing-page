@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const sections = [
   {
     title: "Google Search Console integration for real SEO opportunities",
@@ -182,10 +178,8 @@ const sections = [
 ];
 
 export function IntegrationDetails() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="border-t border-border-light bg-gradient-to-b from-border-light/30 to-transparent py-20 md:py-28">
+    <section className="border-t border-border-light bg-gradient-to-b from-border-light/30 to-transparent py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-6 space-y-20 md:space-y-28">
         {sections.map((section, i) => {
           const reversed = i % 2 !== 0;

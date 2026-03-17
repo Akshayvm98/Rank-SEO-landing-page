@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const benefits = [
   {
     title: "Spend less time on repetitive operational work",
@@ -31,10 +27,8 @@ const benefits = [
 ];
 
 export function SEOProsBenefits() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="border-t border-border-light bg-gradient-to-b from-border-light/20 to-transparent py-16 md:py-24">
+    <section className="border-t border-border-light bg-gradient-to-b from-border-light/20 to-transparent py-16 md:py-24">
       <div className="mx-auto max-w-[720px] px-6">
         <h2 className="reveal text-center text-[1.5rem] font-bold tracking-[-0.02em] text-foreground md:text-[2rem]">
           What changes when execution is no longer the bottleneck

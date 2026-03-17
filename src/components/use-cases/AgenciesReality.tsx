@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const clientCards = [
   {
     domain: "acme.com",
@@ -42,10 +38,8 @@ const clientCards = [
 ];
 
 export function AgenciesReality() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="border-t border-border-light bg-gradient-to-b from-border-light/20 to-transparent py-16 md:py-24">
+    <section className="border-t border-border-light bg-gradient-to-b from-border-light/20 to-transparent py-16 md:py-24">
       <div className="mx-auto max-w-[1000px] px-6">
         <div className="grid gap-10 md:grid-cols-[1.1fr_1fr] md:gap-16 md:items-center">
           {/* Left: Copy */}

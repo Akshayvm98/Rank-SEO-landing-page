@@ -7,7 +7,7 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://rank-seo-landing-page.vercel.app";
+const siteUrl = "https://rankseoengine.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s — Rank SEO",
   },
   description:
-    "Turn your website into a traffic engine that grows itself. Rank SEO finds keyword opportunities, generates optimized content, and publishes automatically.",
+    "Build an organic growth engine that runs itself. Rank SEO finds keyword opportunities, generates optimized content, and publishes automatically.",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "Rank SEO",
     title: "Rank SEO — AI-Powered SEO Automation Platform",
     description:
-      "Turn your website into a traffic engine that grows itself. Rank SEO finds keyword opportunities, generates optimized content, and publishes automatically.",
+      "Build an organic growth engine that runs itself. Rank SEO finds keyword opportunities, generates optimized content, and publishes automatically.",
     images: [
       {
         url: "/opengraph-image",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Rank SEO — AI-Powered SEO Automation Platform",
     description:
-      "Turn your website into a traffic engine that grows itself. Connect Search Console, find keywords, generate content, and publish automatically.",
+      "Build an organic growth engine that runs itself. Connect Search Console, find keywords, generate content, and publish automatically.",
     images: ["/opengraph-image"],
   },
   robots: {
@@ -66,6 +66,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} antialiased`}>
         {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var o=new IntersectionObserver(function(e){e.forEach(function(n){if(n.isIntersecting){n.target.classList.add("visible");o.unobserve(n.target)}})},{threshold:0.15,rootMargin:"0px 0px -40px 0px"});function init(){document.querySelectorAll(".reveal:not(.visible)").forEach(function(el){o.observe(el)})}init();new MutationObserver(function(){init()}).observe(document.body,{childList:true,subtree:true})})();`,
+          }}
+        />
       </body>
     </html>
   );

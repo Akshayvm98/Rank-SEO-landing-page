@@ -1,12 +1,6 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 export function FoundersCTA() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="py-20 md:py-28">
+    <section className="py-20 md:py-28">
       <div className="mx-auto max-w-[600px] px-6 text-center">
         <div className="reveal">
           <h2 className="text-[1.5rem] font-bold tracking-[-0.02em] text-foreground md:text-[2rem]">

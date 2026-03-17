@@ -1,7 +1,3 @@
-"use client";
-
-import { useReveal } from "@/hooks/useReveal";
-
 const steps = [
   {
     number: "01",
@@ -36,10 +32,8 @@ const steps = [
 ];
 
 export function FoundersHowItWorks() {
-  const ref = useReveal();
-
   return (
-    <section ref={ref} className="py-20 md:py-28">
+    <section className="py-20 md:py-28">
       <div className="mx-auto max-w-[520px] px-6">
         <h2 className="reveal mb-14 text-center text-[1.5rem] font-bold tracking-[-0.02em] text-foreground md:text-[2rem]">
           How it works
