@@ -153,7 +153,7 @@ export function WorkflowSection() {
 
         <div className="relative">
           {/* Connecting line (desktop only) */}
-          <div className="absolute left-[28px] top-0 bottom-0 hidden w-px bg-gradient-to-b from-accent-muted via-accent/30 to-accent-muted md:block" />
+          <div className="absolute left-[28px] top-0 bottom-0 hidden w-px bg-gradient-to-b from-accent-muted via-accent/30 to-transparent md:block" />
 
           <div className="space-y-8 md:space-y-12">
             {steps.map((step, i) => (

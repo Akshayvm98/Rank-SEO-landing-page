@@ -43,7 +43,7 @@ export function IntegrationsWorkflow() {
 
         {/* Mobile */}
         <div className="reveal reveal-delay-2 relative md:hidden">
-          <div className="absolute left-6 top-0 bottom-0 w-px bg-border" />
+          <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-border via-border to-transparent" />
           <div className="space-y-6">
             {steps.map((step) => (
               <div key={step.number} className="relative flex gap-5 pl-2">
