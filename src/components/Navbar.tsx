@@ -28,7 +28,7 @@ export function Navbar() {
     >
       <nav className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-6">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5">
+        <a href="/" className="flex items-center gap-2.5">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent to-accent-light">
             <span className="text-[16px] font-bold leading-none text-white">R</span>
           </div>

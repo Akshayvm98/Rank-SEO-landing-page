@@ -5,7 +5,6 @@ const footerLinks = [
       { label: "Features", href: "#features" },
       { label: "Integrations", href: "#" },
       { label: "Pricing", href: "#pricing" },
-      { label: "Changelog", href: "#" },
     ],
   },
   {
@@ -27,10 +26,8 @@ const footerLinks = [
 ];
 
 const socialLinks = [
-  { label: "WhatsApp", href: "#" },
-  { label: "Telegram", href: "#" },
-  { label: "Instagram", href: "#" },
-  { label: "Facebook", href: "#" },
+  { label: "LinkedIn", href: "#" },
+  { label: "Twitter", href: "#" },
 ];
 
 export function Footer() {
@@ -40,7 +37,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div>
-            <a href="#" className="flex items-center gap-2.5">
+            <a href="/" className="flex items-center gap-2.5">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent to-accent-light">
                 <span className="text-[16px] font-bold leading-none text-white">R</span>
               </div>

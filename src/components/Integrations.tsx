@@ -37,9 +37,8 @@ const integrations = [
     name: "Framer",
     description: "Push optimized pages to Framer sites",
     icon: (
-      <svg className="h-7 w-7" viewBox="0 0 24 24" fill="#0055FF">
-        <path d="M4 20V4h16v5.333H12V16h8v4H4z" />
-        <path d="M12 9.333h8V4h-8v5.333z" opacity=".6" />
+      <svg className="h-7 w-7" viewBox="0 0 14 21" fill="#0055FF">
+        <path d="M0 14h7v7l7-7H7V7h7L0 0v14z" />
       </svg>
     ),
   },
