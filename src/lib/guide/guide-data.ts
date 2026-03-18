@@ -423,6 +423,31 @@ const articles: GuideArticlePage[] = [
       "How to write title tags that get clicks and improve your SEO rankings.",
     relatedIds: ["on-page-seo", "how-to-write-seo-articles", "content-optimization"],
   },
+  {
+    id: "internal-linking",
+    type: "article",
+    title: "Internal Linking Guide",
+    slug: "internal-linking",
+    topicSlug: "on-page-seo",
+    excerpt:
+      "Learn how internal linking improves SEO, rankings, and site structure with practical strategies.",
+    category: "On-Page",
+    order: 3.2,
+    published: true,
+    lastUpdated: "2026-03-18",
+    readingTime: 8,
+    seoTitle: "Internal Linking Guide (How to Boost SEO With Better Connections)",
+    seoDescription:
+      "Learn how internal linking improves SEO, rankings, and site structure. A practical guide to building better internal links.",
+    ogTitle: "Internal Linking Guide | RankSEO",
+    ogDescription:
+      "A practical guide to internal linking that improves SEO and site structure.",
+    ogImage: "/og-image.png",
+    twitterTitle: "Internal Linking Guide | RankSEO",
+    twitterDescription:
+      "How internal linking improves your SEO more than you think — practical strategies included.",
+    relatedIds: ["on-page-seo", "keyword-clustering", "content-optimization", "seo-analytics"],
+  },
 ];
 
 // ---------------------------------------------------------------------------
