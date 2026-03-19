@@ -19,9 +19,9 @@ const categories = [
     name: "On-Page SEO",
     tools: [
       { id: "meta-tag-checker", live: true },
+      { id: "heading-structure-checker", live: true },
     ],
     comingSoon: [
-      { name: "Heading Structure Checker", description: "Verify H1-H6 hierarchy and find structural issues." },
       { name: "Keyword Density Checker", description: "Analyze keyword usage and avoid over-optimization." },
     ],
   },

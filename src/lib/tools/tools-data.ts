@@ -29,13 +29,19 @@ export const freeTools: ToolMeta[] = [
     href: "/tools/meta-tag-checker",
     published: true,
   },
+  {
+    id: "heading-structure-checker",
+    slug: "heading-structure-checker",
+    name: "Heading Structure Checker",
+    tagline: "Analyze heading hierarchy and detect SEO issues",
+    description:
+      "Check H1, H2, H3 structure on any page. Detect missing headings, hierarchy issues, and get actionable recommendations.",
+    category: "On-Page SEO",
+    icon: "alignLeft",
+    href: "/tools/heading-structure-checker",
+    published: true,
+  },
   // Future tools — add entries here as they are built
-  // {
-  //   id: "heading-structure-checker",
-  //   slug: "heading-structure-checker",
-  //   name: "Heading Structure Checker",
-  //   ...
-  // },
 ];
 
 export function getToolBySlug(slug: string): ToolMeta | null {
