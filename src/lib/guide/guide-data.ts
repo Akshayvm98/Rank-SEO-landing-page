@@ -1354,6 +1354,32 @@ const articles: GuideArticlePage[] = [
       "AI vs human content for SEO: what actually works and how to get the best of both.",
     relatedIds: ["ai-seo", "scale-content-with-ai", "content-optimization", "internal-linking-best-practices", "keyword-prioritization"],
   },
+  {
+    id: "automate-seo-content",
+    type: "article",
+    title: "How to Automate SEO Content Creation",
+    slug: "automate-seo-content",
+    topicSlug: "ai-seo",
+    excerpt:
+      "Learn how to automate SEO content creation using AI. Build a scalable content engine that drives consistent organic traffic.",
+    category: "AI SEO",
+    order: 8.3,
+    published: true,
+    lastUpdated: "2026-03-19",
+    readingTime: 10,
+    seoTitle:
+      "How to Automate SEO Content Creation (Step-by-Step Guide)",
+    seoDescription:
+      "Learn how to automate SEO content creation using AI. Build a scalable content engine that drives consistent organic traffic.",
+    ogTitle: "Automate SEO Content Creation | RankSEO",
+    ogDescription:
+      "Build a scalable content engine that automates SEO content creation without sacrificing quality.",
+    ogImage: "/og-image.png",
+    twitterTitle: "Automate SEO Content | RankSEO",
+    twitterDescription:
+      "How to automate SEO content creation with a repeatable system that scales.",
+    relatedIds: ["ai-seo", "scale-content-with-ai", "ai-vs-human-content", "content-optimization", "keyword-prioritization"],
+  },
 ];
 
 // ---------------------------------------------------------------------------
