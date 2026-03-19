@@ -137,8 +137,9 @@ export function CanonicalTagChecker() {
         if (res.status === 429) { setGate(data.gate); setShowGateModal(true); return; }
         throw new Error(data.error || "Analysis failed");
       }
-      setPageUrl(data.data.url);
-      setPageTitle(data.data.title || data.data.url);
+      setPageUrl(data.data.url ?? "");
+      const rawTitle = data.data.title;
+      setPageTitle((typeof rawTitle === "string" ? rawTitle : rawTitle?.value ?? "") || data.data.url || "");
       const canonical = data.data.canonical ?? null;
       const canonicalCount = data.data.canonicalCount ?? (canonical ? 1 : 0);
       setResult(analyzeCanonical(data.data.url, canonical, canonicalCount));

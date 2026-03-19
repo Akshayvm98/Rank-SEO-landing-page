@@ -81,9 +81,19 @@ export function OpenGraphChecker() {
         if (res.status === 429) { setGate(data.gate); setShowGateModal(true); return; }
         throw new Error(data.error || "Analysis failed");
       }
-      setOgTags(data.data.ogTags ?? {});
-      setPageTitle(data.data.title || data.data.url);
-      setPageUrl(data.data.url);
+      // API returns openGraph with unprefixed keys (title, description, image)
+      // Re-prefix them to og:title, og:description, og:image for the UI
+      const rawOg: Record<string, string> = data.data.openGraph ?? {};
+      const prefixed: Record<string, string> = {};
+      for (const [key, val] of Object.entries(rawOg)) {
+        prefixed[key.startsWith("og:") ? key : `og:${key}`] = val;
+      }
+      setOgTags(prefixed);
+      // title may be a string or { value: string } depending on API
+      const rawTitle = data.data.title;
+      const titleStr = typeof rawTitle === "string" ? rawTitle : rawTitle?.value ?? "";
+      setPageTitle(titleStr || data.data.url || "");
+      setPageUrl(data.data.url ?? "");
       setGate(data.gate);
       trackToolEvent("analysis_completed", { toolId: TOOL_ID });
       if (data.gate?.showSignupPrompt) trackToolEvent("signup_prompt_shown", { toolId: TOOL_ID });
@@ -140,7 +150,7 @@ export function OpenGraphChecker() {
                   </div>
                 )}
                 <div className="p-4">
-                  <p className="text-[11px] text-muted uppercase">{ogTags["og:site_name"] || new URL(pageUrl).hostname}</p>
+                  <p className="text-[11px] text-muted uppercase">{ogTags["og:site_name"] || (() => { try { return new URL(pageUrl).hostname; } catch { return pageUrl; } })()}</p>
                   <p className="mt-1 text-[15px] font-bold text-foreground leading-snug">{ogTags["og:title"] || pageTitle || "No og:title"}</p>
                   <p className="mt-1 text-[13px] text-muted leading-snug line-clamp-2">{ogTags["og:description"] || "No og:description"}</p>
                 </div>
