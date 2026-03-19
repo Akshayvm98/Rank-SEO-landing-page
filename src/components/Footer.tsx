@@ -23,6 +23,14 @@ const footerLinks = [
       { label: "Documentation", href: "#" },
     ],
   },
+  {
+    title: "Free Tools",
+    links: [
+      { label: "All Tools", href: "/tools" },
+      { label: "Content Length Analyzer", href: "/tools/content-length-analyzer" },
+      { label: "Meta Tag Checker", href: "/tools/meta-tag-checker" },
+    ],
+  },
 ];
 
 const socialLinks = [
@@ -50,7 +58,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border-light">
       <div className="mx-auto max-w-[1200px] px-6 pt-16 pb-8">
-        <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div>
             <a href="/" className="flex items-center gap-2.5">

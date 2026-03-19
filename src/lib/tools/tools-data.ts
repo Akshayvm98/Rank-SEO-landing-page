@@ -14,7 +14,7 @@ export const freeTools: ToolMeta[] = [
       "Analyze any page's word count, headings, links, and reading time. Get SEO recommendations based on content length.",
     category: "Content",
     icon: "fileText",
-    href: "/free-tools/content-length-analyzer",
+    href: "/tools/content-length-analyzer",
     published: true,
   },
   {
@@ -26,7 +26,7 @@ export const freeTools: ToolMeta[] = [
       "Check title tags, meta descriptions, Open Graph, Twitter Cards, canonical, robots, and all other meta tags. Get length assessments and optimization tips.",
     category: "On-Page SEO",
     icon: "tag",
-    href: "/free-tools/meta-tag-checker",
+    href: "/tools/meta-tag-checker",
     published: true,
   },
   // Future tools — add entries here as they are built

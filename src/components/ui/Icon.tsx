@@ -58,6 +58,7 @@ import {
   Upload,
   User,
   Users,
+  Wrench,
   X,
   Zap,
 } from "lucide-react";
@@ -122,6 +123,7 @@ export const Icons = {
   upload: Upload,
   user: User,
   users: Users,
+  tool: Wrench,
   x: X,
   zap: Zap,
 } as const;
