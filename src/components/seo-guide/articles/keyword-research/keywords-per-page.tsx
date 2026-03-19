@@ -166,6 +166,30 @@ export default function KeywordsPerPage() {
       {/* Topic cluster visual */}
       {/* ------------------------------------------------------------------ */}
       <Section id="topic-based-seo" title="Why topics beat keyword counts">
+        {/* Visual: Old vs Modern Approach */}
+        <div className="mt-2 mb-4 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)]">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-muted-light mb-3">
+            Old SEO vs Modern SEO
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-red-100/60 bg-red-50/20 px-4 py-3">
+              <p className="text-[10px] font-bold uppercase tracking-wide text-red-500 mb-1">
+                Old Approach
+              </p>
+              <p className="text-[13px] text-muted">
+                One page per exact keyword. Separate pages for &quot;best running shoes&quot; and &quot;top running shoes.&quot;
+              </p>
+            </div>
+            <div className="rounded-xl border border-emerald-100/60 bg-emerald-50/20 px-4 py-3">
+              <p className="text-[10px] font-bold uppercase tracking-wide text-emerald-600 mb-1">
+                Modern Approach
+              </p>
+              <p className="text-[13px] font-medium text-foreground">
+                One comprehensive page per topic. Covers all variations naturally and ranks for hundreds of related queries.
+              </p>
+            </div>
+          </div>
+        </div>
         <Paragraph>
           Google has evolved from matching keywords to understanding topics. A
           single well-structured page can rank for dozens or even hundreds of

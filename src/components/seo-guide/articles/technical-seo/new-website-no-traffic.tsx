@@ -376,6 +376,32 @@ export default function NewWebsiteNoTraffic() {
       {/* How RankSEO helps new websites grow faster */}
       {/* ------------------------------------------------------------------ */}
       <Section id="rankseo" title="How RankSEO helps new websites grow faster">
+        {/* Visual: New Site Priority Checklist */}
+        <div className="mb-6 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)]">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-accent mb-4">
+            New Website SEO Priority Checklist
+          </p>
+          <div className="space-y-2.5">
+            {[
+              "Submit XML sitemap in Google Search Console",
+              "Verify all important pages are indexed",
+              "Target low-competition, long-tail keywords first",
+              "Publish 2-4 quality articles per month consistently",
+              "Build internal links between every related page",
+              "Set up Google Search Console and monitor weekly",
+            ].map((item) => (
+              <div
+                key={item}
+                className="flex items-start gap-2.5 rounded-lg border border-black/[0.04] bg-accent-bg/20 px-3.5 py-2.5"
+              >
+                <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border border-accent/30 text-[10px] text-accent">
+                  ✓
+                </span>
+                <span className="text-[13px] text-foreground">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
         <BulletList
           items={[
             <span key="feat">

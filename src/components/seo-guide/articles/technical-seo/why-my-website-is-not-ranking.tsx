@@ -5,6 +5,7 @@ import {
   BulletList,
   NumberedList,
   Callout,
+  DataCard,
   FaqSection,
 } from "@/components/seo-guide/ArticleBlocks";
 
@@ -39,6 +40,14 @@ export default function WhyMyWebsiteIsNotRanking() {
               title: "Rank",
               text: "For every search query, Google evaluates hundreds of signals to decide the order of results. Only indexed pages are eligible to rank.",
             },
+          ]}
+        />
+        <DataCard
+          items={[
+            { label: "Relevance", value: "Intent match", note: "Does your content match what the searcher wants?" },
+            { label: "Quality", value: "Content depth", note: "Is the content thorough and original?" },
+            { label: "Authority", value: "Backlinks & trust", note: "Does your site have credibility signals?" },
+            { label: "Technical", value: "Speed & access", note: "Can Google crawl, index, and render the page?" },
           ]}
         />
         <Paragraph>
@@ -453,6 +462,32 @@ export default function WhyMyWebsiteIsNotRanking() {
       {/* How RankSEO helps */}
       {/* ------------------------------------------------------------------ */}
       <Section id="rankseo" title="How RankSEO helps you fix ranking issues">
+        {/* Visual: Ranking Diagnostic Checklist */}
+        <div className="mb-6 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)]">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-accent mb-4">
+            Quick Ranking Diagnostic
+          </p>
+          <div className="space-y-2.5">
+            {[
+              "Is the page indexed? (Check URL Inspection in Search Console)",
+              "Is the page targeting the right keyword for its content?",
+              "Does the content match the search intent for that keyword?",
+              "Is the keyword difficulty realistic for your site's authority?",
+              "Are there technical issues blocking crawling or rendering?",
+              "Does the page have internal links from other indexed pages?",
+            ].map((item) => (
+              <div
+                key={item}
+                className="flex items-start gap-2.5 rounded-lg border border-black/[0.04] bg-accent-bg/20 px-3.5 py-2.5"
+              >
+                <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border border-accent/30 text-[10px] text-accent">
+                  ✓
+                </span>
+                <span className="text-[13px] text-foreground">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
         <BulletList
           items={[
             <span key="feat">

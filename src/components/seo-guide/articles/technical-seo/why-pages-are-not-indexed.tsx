@@ -5,6 +5,7 @@ import {
   BulletList,
   NumberedList,
   Callout,
+  DataCard,
   FaqSection,
 } from "@/components/seo-guide/ArticleBlocks";
 
@@ -44,6 +45,31 @@ export default function WhyPagesAreNotIndexed() {
           article covers each one, shows you how to diagnose it, and gives you a
           clear fix.
         </Paragraph>
+
+        {/* Visual: Indexing Flow */}
+        <div className="mt-6 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)]">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-accent mb-4">
+            How Google Indexes a Page
+          </p>
+          <div className="flex flex-col sm:flex-row items-stretch gap-2">
+            {[
+              { step: "Discover", desc: "Finds the URL via links or sitemap" },
+              { step: "Crawl", desc: "Visits and reads the page content" },
+              { step: "Evaluate", desc: "Assesses quality and relevance" },
+              { step: "Index", desc: "Stores the page in its database" },
+            ].map((item, i) => (
+              <div key={item.step} className="flex items-center gap-2 flex-1">
+                <div className="rounded-xl border border-black/[0.04] bg-accent-bg/30 px-4 py-3 text-center flex-1">
+                  <p className="text-[13px] font-bold text-foreground">{item.step}</p>
+                  <p className="mt-0.5 text-[11px] text-muted">{item.desc}</p>
+                </div>
+                {i < 3 && (
+                  <span className="hidden sm:block text-muted text-[14px]">→</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
       </Section>
 
       {/* ------------------------------------------------------------------ */}
@@ -403,6 +429,13 @@ export default function WhyPagesAreNotIndexed() {
       {/* How to check indexing */}
       {/* ------------------------------------------------------------------ */}
       <Section id="how-to-check" title="How to check if your page is indexed">
+        <DataCard
+          items={[
+            { label: "Quick check", value: "site: search", note: "Search site:yoursite.com/url on Google" },
+            { label: "Reliable check", value: "URL Inspection", note: "Use Google Search Console for definitive answer" },
+            { label: "Bulk check", value: "Pages report", note: "Indexing > Pages in Search Console" },
+          ]}
+        />
         <Paragraph>
           Before fixing anything, confirm whether the page is actually indexed.
           There are two reliable methods.

@@ -273,6 +273,30 @@ export default function ShortVsLongTailKeywords() {
       {/* Beginner strategy */}
       {/* ------------------------------------------------------------------ */}
       <Section id="beginner-strategy" title="The best keyword strategy for beginners">
+        {/* Visual: Strategy Progression Flow */}
+        <div className="mt-2 mb-4 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)]">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-accent mb-4">
+            Keyword Strategy Progression
+          </p>
+          <div className="flex flex-col sm:flex-row items-stretch gap-2">
+            {[
+              { step: "Start", desc: "Long tail, low competition" },
+              { step: "Build", desc: "Earn traffic and authority" },
+              { step: "Expand", desc: "Medium difficulty keywords" },
+              { step: "Compete", desc: "Head terms and short tail" },
+            ].map((item, i) => (
+              <div key={item.step} className="flex items-center gap-2 flex-1">
+                <div className="rounded-xl border border-black/[0.04] bg-accent-bg/30 px-4 py-3 text-center flex-1">
+                  <p className="text-[13px] font-bold text-foreground">{item.step}</p>
+                  <p className="mt-0.5 text-[11px] text-muted">{item.desc}</p>
+                </div>
+                {i < 3 && (
+                  <span className="hidden sm:block text-muted text-[14px]">→</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
         <Paragraph>
           Here is a practical framework for building traffic with keywords,
           regardless of your starting point.

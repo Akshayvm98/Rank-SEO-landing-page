@@ -5,6 +5,7 @@ import {
   BulletList,
   NumberedList,
   Callout,
+  DataCard,
   FaqSection,
 } from "@/components/seo-guide/ArticleBlocks";
 
@@ -33,6 +34,13 @@ export default function WhyRankingDropped() {
           movement signals something changed, either on your site, on
           competitors&apos; sites, or in Google&apos;s algorithm.
         </Paragraph>
+        <DataCard
+          items={[
+            { label: "Normal fluctuation", value: "1-2 positions", note: "Resolves within days, no action needed" },
+            { label: "Minor drop", value: "3-5 positions", note: "Monitor for a week, then investigate" },
+            { label: "Significant drop", value: "5+ positions", note: "Investigate immediately, likely a real issue" },
+          ]}
+        />
         <Paragraph>
           The best place to confirm a real drop is the Google Search Console
           performance report. Filter by page and compare the drop period to the
@@ -374,6 +382,30 @@ export default function WhyRankingDropped() {
       {/* How RankSEO helps */}
       {/* ------------------------------------------------------------------ */}
       <Section id="rankseo" title="How RankSEO helps you catch and fix ranking drops">
+        {/* Visual: Recovery Steps Flow */}
+        <div className="mb-6 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)]">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-accent mb-4">
+            Ranking Drop Recovery Steps
+          </p>
+          <div className="flex flex-col sm:flex-row items-stretch gap-2">
+            {[
+              { step: "1. Confirm", desc: "Verify the drop in Search Console" },
+              { step: "2. Diagnose", desc: "Identify the cause from the list above" },
+              { step: "3. Fix", desc: "Apply the targeted solution" },
+              { step: "4. Monitor", desc: "Track recovery over 2-4 weeks" },
+            ].map((item, i) => (
+              <div key={item.step} className="flex items-center gap-2 flex-1">
+                <div className="rounded-xl border border-black/[0.04] bg-accent-bg/30 px-4 py-3 text-center flex-1">
+                  <p className="text-[13px] font-bold text-foreground">{item.step}</p>
+                  <p className="mt-0.5 text-[11px] text-muted">{item.desc}</p>
+                </div>
+                {i < 3 && (
+                  <span className="hidden sm:block text-muted text-[14px]">→</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
         <Paragraph>
           Catching ranking drops early is the difference between a minor dip
           and a major traffic loss. Manual monitoring is slow and easy to miss.

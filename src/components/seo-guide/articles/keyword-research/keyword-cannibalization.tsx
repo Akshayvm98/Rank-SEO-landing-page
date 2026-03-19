@@ -273,17 +273,33 @@ export default function KeywordCannibalization() {
           Use this checklist to systematically find and fix cannibalization
           across your site.
         </Paragraph>
-        <BulletList
-          items={[
-            "Export your top queries from Google Search Console with page-level data",
-            "Flag any query where more than one page receives impressions",
-            "Check whether the competing pages have the same search intent",
-            "Decide on a strategy: merge, redirect, re-target, or canonical",
-            "Implement the fix and update all internal links accordingly",
-            "Monitor rankings for 2 to 4 weeks to confirm improvement",
-            "Repeat quarterly as your content library grows",
-          ]}
-        />
+        {/* Visual: Audit Checklist */}
+        <div className="mt-4 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)]">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-accent mb-4">
+            Cannibalization Audit Steps
+          </p>
+          <div className="space-y-2.5">
+            {[
+              "Export your top queries from Google Search Console with page-level data",
+              "Flag any query where more than one page receives impressions",
+              "Check whether the competing pages have the same search intent",
+              "Decide on a strategy: merge, redirect, re-target, or canonical",
+              "Implement the fix and update all internal links accordingly",
+              "Monitor rankings for 2 to 4 weeks to confirm improvement",
+              "Repeat quarterly as your content library grows",
+            ].map((item) => (
+              <div
+                key={item}
+                className="flex items-start gap-2.5 rounded-lg border border-black/[0.04] bg-accent-bg/20 px-3.5 py-2.5"
+              >
+                <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border border-accent/30 text-[10px] text-accent">
+                  ✓
+                </span>
+                <span className="text-[13px] text-foreground">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </Section>
 
       {/* ------------------------------------------------------------------ */}

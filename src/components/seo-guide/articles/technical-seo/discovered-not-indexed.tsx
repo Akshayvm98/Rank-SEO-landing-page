@@ -5,6 +5,7 @@ import {
   BulletList,
   NumberedList,
   Callout,
+  DataCard,
   FaqSection,
 } from "@/components/seo-guide/ArticleBlocks";
 
@@ -59,6 +60,27 @@ export default function DiscoveredNotIndexed() {
       {/* Discovered vs Crawled */}
       {/* ------------------------------------------------------------------ */}
       <Section id="discovered-vs-crawled" title="Discovered vs Crawled: why the difference matters">
+        {/* Visual: Status Comparison */}
+        <div className="mt-2 mb-4 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)]">
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-amber-100/60 bg-amber-50/20 px-4 py-3">
+              <p className="text-[10px] font-bold uppercase tracking-wide text-amber-600 mb-1">
+                Discovered, not indexed
+              </p>
+              <p className="text-[13px] text-muted">
+                Google found the URL but has not visited it yet. This is a <strong>priority problem</strong>. Fix: improve internal linking and site authority.
+              </p>
+            </div>
+            <div className="rounded-xl border border-red-100/60 bg-red-50/20 px-4 py-3">
+              <p className="text-[10px] font-bold uppercase tracking-wide text-red-500 mb-1">
+                Crawled, not indexed
+              </p>
+              <p className="text-[13px] text-muted">
+                Google visited the page but chose not to store it. This is a <strong>quality problem</strong>. Fix: improve content depth and uniqueness.
+              </p>
+            </div>
+          </div>
+        </div>
         <Paragraph>
           Google Search Console shows several indexing statuses. The two that
           confuse people most are closely related but have different root causes.

@@ -101,12 +101,25 @@ export default function WhyImpressionButNoClicks() {
             "Test brackets or parentheses for extra context: '(With Examples)' or '[2026 Guide]'",
           ]}
         />
-        <Paragraph>
-          Before: "Content Marketing Tips"
-        </Paragraph>
-        <Paragraph>
-          After: "9 Content Marketing Tips That Actually Drive Traffic"
-        </Paragraph>
+        {/* Visual: Before vs After Title */}
+        <div className="mt-4 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)]">
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-red-100/60 bg-red-50/20 px-4 py-3">
+              <p className="text-[10px] font-bold uppercase tracking-wide text-red-500 mb-1">
+                Before
+              </p>
+              <p className="text-[13px] text-muted">&quot;Content Marketing Tips&quot;</p>
+            </div>
+            <div className="rounded-xl border border-emerald-100/60 bg-emerald-50/20 px-4 py-3">
+              <p className="text-[10px] font-bold uppercase tracking-wide text-emerald-600 mb-1">
+                After
+              </p>
+              <p className="text-[13px] font-medium text-foreground">
+                &quot;9 Content Marketing Tips That Actually Drive Traffic&quot;
+              </p>
+            </div>
+          </div>
+        </div>
         <Paragraph>
           For a deeper look at writing titles that perform, see our{" "}
           <a
@@ -422,6 +435,32 @@ export default function WhyImpressionButNoClicks() {
       {/* How RankSEO helps */}
       {/* ------------------------------------------------------------------ */}
       <Section id="rankseo" title="How RankSEO helps you turn impressions into clicks">
+        {/* Visual: CTR Improvement Checklist */}
+        <div className="mb-6 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.04)]">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-accent mb-4">
+            CTR Improvement Checklist
+          </p>
+          <div className="space-y-2.5">
+            {[
+              "Identify pages with high impressions but low CTR in Search Console",
+              "Rewrite title tags to be specific, compelling, and under 60 characters",
+              "Improve meta descriptions to clearly promise value",
+              "Check that your URL matches the search intent",
+              "Compare your titles against competitors on page one",
+              "Monitor CTR changes weekly after making improvements",
+            ].map((item) => (
+              <div
+                key={item}
+                className="flex items-start gap-2.5 rounded-lg border border-black/[0.04] bg-accent-bg/20 px-3.5 py-2.5"
+              >
+                <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border border-accent/30 text-[10px] text-accent">
+                  ✓
+                </span>
+                <span className="text-[13px] text-foreground">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
         <Paragraph>
           Manually auditing every page in Search Console, comparing titles
           against competitors, and tracking CTR changes over time is tedious
