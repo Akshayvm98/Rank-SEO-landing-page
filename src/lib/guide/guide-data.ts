@@ -732,6 +732,162 @@ const articles: GuideArticlePage[] = [
       "Avoid these SEO writing mistakes that are killing your rankings. Practical fixes included.",
     relatedIds: ["content-seo", "search-intent", "how-to-write-seo-articles", "content-optimization", "title-tags"],
   },
+  {
+    id: "why-pages-are-not-indexed",
+    type: "article",
+    title: "Why Pages Are Not Indexed by Google",
+    slug: "why-pages-are-not-indexed",
+    topicSlug: "technical-seo",
+    excerpt:
+      "Learn why your pages are not indexed by Google and how to fix common indexing issues step by step.",
+    category: "On-Page",
+    order: 4.2,
+    published: true,
+    lastUpdated: "2026-03-19",
+    readingTime: 11,
+    seoTitle:
+      "Why My Pages Are Not Indexed by Google (How to Fix It)",
+    seoDescription:
+      "Struggling with pages not indexed by Google? Learn the real reasons and how to fix indexing issues fast.",
+    ogTitle: "Why Pages Are Not Indexed by Google | RankSEO",
+    ogDescription:
+      "Learn why Google is not indexing your pages and how to diagnose and fix the most common causes.",
+    ogImage: "/og-image.png",
+    twitterTitle: "Why Pages Are Not Indexed | RankSEO",
+    twitterDescription:
+      "Pages not showing up in Google? Learn the common causes and exactly how to fix them.",
+    relatedIds: ["technical-seo", "robots-txt-guide", "internal-linking", "content-optimization"],
+  },
+  {
+    id: "why-impressions-but-no-clicks",
+    type: "article",
+    title: "Why Impressions but No Clicks",
+    slug: "why-impressions-but-no-clicks",
+    topicSlug: "on-page-seo",
+    excerpt:
+      "Getting impressions but no clicks? Learn why your CTR is low and how to turn visibility into real traffic.",
+    category: "On-Page",
+    order: 3.3,
+    published: true,
+    lastUpdated: "2026-03-19",
+    readingTime: 10,
+    seoTitle:
+      "Why Impressions but No Clicks (And How to Fix It)",
+    seoDescription:
+      "Getting impressions but no clicks? Learn why your CTR is low and how to turn visibility into real traffic.",
+    ogTitle: "Why Impressions but No Clicks | RankSEO",
+    ogDescription:
+      "Your pages show up in Google but nobody clicks. Learn why and how to fix it.",
+    ogImage: "/og-image.png",
+    twitterTitle: "Why Impressions but No Clicks | RankSEO",
+    twitterDescription:
+      "Getting impressions but no clicks in Google? Learn the common causes and how to improve your CTR.",
+    relatedIds: ["on-page-seo", "title-tags", "search-intent", "content-optimization", "how-to-improve-ctr"],
+  },
+  {
+    id: "why-my-website-is-not-ranking",
+    type: "article",
+    title: "Why My Website Is Not Ranking",
+    slug: "why-my-website-is-not-ranking",
+    topicSlug: "technical-seo",
+    excerpt:
+      "Learn why your website is not ranking on Google and how to fix common SEO issues step by step.",
+    category: "On-Page",
+    order: 4.3,
+    published: true,
+    lastUpdated: "2026-03-19",
+    readingTime: 11,
+    seoTitle:
+      "Why My Website Is Not Ranking on Google (And How to Fix It)",
+    seoDescription:
+      "Wondering why your website is not ranking on Google? Learn the real reasons and how to fix your SEO step by step.",
+    ogTitle: "Why My Website Is Not Ranking | RankSEO",
+    ogDescription:
+      "Learn why your website is not ranking on Google and the steps to fix it.",
+    ogImage: "/og-image.png",
+    twitterTitle: "Why My Website Is Not Ranking | RankSEO",
+    twitterDescription:
+      "Your website is not ranking on Google? Learn the common causes and how to fix them.",
+    relatedIds: ["technical-seo", "why-pages-are-not-indexed", "how-to-find-low-competition-keywords", "internal-linking", "content-optimization"],
+  },
+  {
+    id: "why-ranking-dropped",
+    type: "article",
+    title: "Why Your Rankings Dropped",
+    slug: "why-ranking-dropped",
+    topicSlug: "technical-seo",
+    excerpt:
+      "Did your rankings drop suddenly? Learn the common causes and how to recover your traffic quickly.",
+    category: "On-Page",
+    order: 4.4,
+    published: true,
+    lastUpdated: "2026-03-19",
+    readingTime: 11,
+    seoTitle:
+      "Why Your Rankings Dropped Suddenly (And How to Fix It)",
+    seoDescription:
+      "Did your rankings drop suddenly? Learn the common causes of ranking drops and how to recover your traffic quickly.",
+    ogTitle: "Why Your Rankings Dropped | RankSEO",
+    ogDescription:
+      "Rankings dropped suddenly? Learn why it happened and how to recover your traffic.",
+    ogImage: "/og-image.png",
+    twitterTitle: "Why Your Rankings Dropped | RankSEO",
+    twitterDescription:
+      "Sudden ranking drop? Learn the common causes and step-by-step recovery process.",
+    relatedIds: ["technical-seo", "why-my-website-is-not-ranking", "why-pages-are-not-indexed", "how-to-update-old-content", "internal-linking"],
+  },
+  {
+    id: "new-website-no-traffic",
+    type: "article",
+    title: "Why Your New Website Is Not Getting Traffic",
+    slug: "new-website-no-traffic",
+    topicSlug: "technical-seo",
+    excerpt:
+      "Learn why your new website is not getting traffic and what to do about it with a clear, step-by-step plan.",
+    category: "On-Page",
+    order: 4.5,
+    published: true,
+    lastUpdated: "2026-03-19",
+    readingTime: 10,
+    seoTitle:
+      "Why Your New Website Is Not Getting Traffic (And How to Fix It)",
+    seoDescription:
+      "New website getting zero traffic? Learn why it happens and the exact steps to start getting organic visitors from Google.",
+    ogTitle: "Why Your New Website Is Not Getting Traffic | RankSEO",
+    ogDescription:
+      "Learn why your new website has no traffic and what to do about it step by step.",
+    ogImage: "/og-image.png",
+    twitterTitle: "New Website No Traffic | RankSEO",
+    twitterDescription:
+      "New website with no traffic? Learn the common causes and a clear plan to fix it.",
+    relatedIds: ["technical-seo", "how-long-does-seo-take", "how-to-find-low-competition-keywords", "why-pages-are-not-indexed", "seo-for-startups"],
+  },
+  {
+    id: "discovered-not-indexed",
+    type: "article",
+    title: "Discovered but Not Indexed",
+    slug: "discovered-not-indexed",
+    topicSlug: "technical-seo",
+    excerpt:
+      "Learn what 'Discovered, currently not indexed' means in Google Search Console and how to fix it.",
+    category: "On-Page",
+    order: 4.6,
+    published: true,
+    lastUpdated: "2026-03-19",
+    readingTime: 10,
+    seoTitle:
+      "Discovered but Not Indexed: What It Means and How to Fix It",
+    seoDescription:
+      "Seeing 'Discovered, currently not indexed' in Google Search Console? Learn what it means, why it happens, and how to get your pages indexed.",
+    ogTitle: "Discovered but Not Indexed | RankSEO",
+    ogDescription:
+      "Learn what 'Discovered, currently not indexed' means and how to fix it in Google Search Console.",
+    ogImage: "/og-image.png",
+    twitterTitle: "Discovered but Not Indexed | RankSEO",
+    twitterDescription:
+      "Fix the 'Discovered, currently not indexed' status in Google Search Console with this step-by-step guide.",
+    relatedIds: ["technical-seo", "why-pages-are-not-indexed", "robots-txt-guide", "internal-linking", "new-website-no-traffic"],
+  },
 ];
 
 // ---------------------------------------------------------------------------
