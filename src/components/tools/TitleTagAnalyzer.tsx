@@ -4,8 +4,10 @@ import { useState } from "react";
 import { Icon, Icons } from "@/components/ui/Icon";
 import { ToolHero } from "./ToolHero";
 import { ToolResultCard } from "./ToolResultCard";
-import { ToolCTA } from "./ToolCTA";
 import { ToolFAQ } from "./ToolFAQ";
+import { ToolRelated } from "./ToolRelated";
+import { ToolGuides } from "./ToolGuides";
+import { ToolContextCTA } from "./ToolContextCTA";
 import { GateModal } from "./GateModal";
 import { trackToolEvent } from "@/lib/tools/event-tracking";
 import { analyzeTitleTag } from "@/lib/tools/title-analysis";
@@ -172,25 +174,9 @@ export function TitleTagAnalyzer() {
         </section>
       )}
 
-      <section className="py-6">
-        <div className="mx-auto max-w-[680px] px-6">
-          <p className="text-[11px] font-medium uppercase tracking-wide text-muted-light mb-3">Related SEO guides</p>
-          <div className="grid gap-2 sm:grid-cols-2">
-            {[
-              { href: "/seo-guide/on-page-seo/title-tags", label: "Title Tags Explained" },
-              { href: "/seo-guide/on-page-seo/keyword-placement", label: "Keyword Placement Guide" },
-              { href: "/seo-guide/seo-analytics/how-to-improve-ctr", label: "How to Improve CTR" },
-              { href: "/seo-guide/content-seo/seo-introductions", label: "SEO-Friendly Introductions" },
-            ].map((link) => (
-              <a key={link.href} href={link.href} className="flex items-center gap-2 rounded-lg border border-black/[0.04] bg-white px-4 py-3 text-[13px] font-medium text-foreground transition-colors hover:border-accent/30 hover:text-accent">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent" />{link.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <ToolCTA title="Want title analysis across your whole site?" description="RankSEO checks every title tag, meta description, and on-page element across your entire site." />
+      <ToolGuides toolId={TOOL_ID} />
+      <ToolRelated currentToolId={TOOL_ID} />
+      <ToolContextCTA toolId={TOOL_ID} />
 
       <ToolFAQ faqs={[
         { question: "What is a title tag?", answer: "A title tag is the HTML element that defines the title of a web page. It appears as the clickable headline in Google search results and in browser tabs. It is one of the most important on-page SEO elements." },

@@ -5,11 +5,12 @@ import { Icon, Icons } from "@/components/ui/Icon";
 import { ToolHero } from "./ToolHero";
 import { ToolInput } from "./ToolInput";
 import { ToolResultCard } from "./ToolResultCard";
-import { ToolCTA } from "./ToolCTA";
 import { ToolFAQ } from "./ToolFAQ";
 import { ToolError } from "./ToolError";
 import { ToolLoading } from "./ToolLoading";
 import { ToolRelated } from "./ToolRelated";
+import { ToolGuides } from "./ToolGuides";
+import { ToolContextCTA } from "./ToolContextCTA";
 import { GateModal } from "./GateModal";
 import { SignupPrompt } from "./SignupPrompt";
 import { trackToolEvent } from "@/lib/tools/event-tracking";
@@ -374,41 +375,9 @@ export function ReadabilityChecker() {
         </section>
       )}
 
-      {/* ── Related guides ── */}
-      <section className="py-6">
-        <div className="mx-auto max-w-[680px] px-6">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-light mb-1">
-            Make your content easier to read
-          </p>
-          <p className="text-[13px] text-muted mb-3">
-            These guides explain how to improve clarity and engagement.
-          </p>
-          <div className="grid gap-2 sm:grid-cols-2">
-            {[
-              { href: "/seo-guide/content-seo/content-readability", label: "Content Readability Guide" },
-              { href: "/seo-guide/content-seo/blog-structure", label: "Blog Structure for SEO" },
-              { href: "/seo-guide/on-page-seo/headings-seo", label: "Heading Tags Best Practices" },
-              { href: "/seo-guide/content-seo/how-to-write-seo-articles", label: "How to Write SEO Articles" },
-            ].map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="group flex items-center gap-2 rounded-lg border border-black/[0.04] bg-white px-4 py-3 text-[13px] font-medium text-foreground transition-all hover:border-accent/30 hover:text-accent hover:shadow-sm"
-              >
-                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      <ToolGuides toolId={TOOL_ID} />
       <ToolRelated currentToolId={TOOL_ID} />
-
-      <ToolCTA
-        title="Want readability checks across your entire site?"
-        description="RankSEO analyzes readability, content structure, and engagement signals on every page. Find the content that is losing readers before it loses rankings."
-      />
+      <ToolContextCTA toolId={TOOL_ID} />
 
       <ToolFAQ
         faqs={[

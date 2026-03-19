@@ -6,7 +6,7 @@ export function SignupPrompt({ visible }: { visible: boolean }) {
     <div className="mx-auto max-w-[680px] px-6 py-3">
       <div className="flex items-center gap-3 rounded-xl border border-accent/20 bg-accent-bg/30 px-5 py-3">
         <span className="text-[13px] text-accent font-medium">
-          You have 1 free analysis remaining today.
+          1 free check remaining today.
         </span>
         <a
           href="/pricing"

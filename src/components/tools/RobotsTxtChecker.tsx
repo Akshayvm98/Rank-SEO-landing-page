@@ -5,7 +5,8 @@ import { Icon, Icons } from "@/components/ui/Icon";
 import { ToolHero } from "./ToolHero";
 import { ToolInput } from "./ToolInput";
 import { ToolResultCard } from "./ToolResultCard";
-import { ToolCTA } from "./ToolCTA";
+import { ToolGuides } from "./ToolGuides";
+import { ToolContextCTA } from "./ToolContextCTA";
 import { ToolFAQ } from "./ToolFAQ";
 import { ToolError } from "./ToolError";
 import { ToolLoading } from "./ToolLoading";
@@ -268,36 +269,9 @@ export function RobotsTxtChecker() {
         </section>
       )}
 
-      {/* ── Guides ── */}
-      <section className="py-6">
-        <div className="mx-auto max-w-[680px] px-6">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-light mb-1">
-            Understand your robots.txt better
-          </p>
-          <p className="text-[13px] text-muted mb-3">
-            These guides explain how robots.txt works and common mistakes to avoid.
-          </p>
-          <div className="grid gap-2 sm:grid-cols-2">
-            {[
-              { href: "/seo-guide/technical-seo/robots-txt-guide", label: "Robots.txt Guide" },
-              { href: "/seo-guide/technical-seo/why-pages-are-not-indexed", label: "Why Pages Are Not Indexed" },
-              { href: "/seo-guide/technical-seo/discovered-not-indexed", label: "Discovered but Not Indexed" },
-              { href: "/seo-guide/technical-seo", label: "Technical SEO Guide" },
-            ].map((link) => (
-              <a key={link.href} href={link.href} className="group flex items-center gap-2 rounded-lg border border-black/[0.04] bg-white px-4 py-3 text-[13px] font-medium text-foreground transition-all hover:border-accent/30 hover:text-accent hover:shadow-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent" />{link.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      <ToolGuides toolId={TOOL_ID} />
       <ToolRelated currentToolId={TOOL_ID} />
-
-      <ToolCTA
-        title="Want to monitor robots.txt and crawl health automatically?"
-        description="RankSEO watches your robots.txt, sitemaps, and crawlability across your entire site. Catch blocking issues before they hurt your rankings."
-      />
+      <ToolContextCTA toolId={TOOL_ID} />
 
       <ToolFAQ faqs={[
         { question: "What is robots.txt?", answer: "robots.txt is a plain text file at the root of a website (e.g. example.com/robots.txt) that tells search engine crawlers which pages they can and cannot access. It helps control crawl behavior, but it does not prevent pages from being indexed if Google finds them through external links." },

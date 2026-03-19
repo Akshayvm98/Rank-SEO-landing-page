@@ -4,8 +4,12 @@ import { useState } from "react";
 import { ToolHero } from "./ToolHero";
 import { ToolInput } from "./ToolInput";
 import { ToolResultCard } from "./ToolResultCard";
-import { ToolCTA } from "./ToolCTA";
 import { ToolFAQ } from "./ToolFAQ";
+import { ToolError } from "./ToolError";
+import { ToolLoading } from "./ToolLoading";
+import { ToolRelated } from "./ToolRelated";
+import { ToolGuides } from "./ToolGuides";
+import { ToolContextCTA } from "./ToolContextCTA";
 import { GateModal } from "./GateModal";
 import { SignupPrompt } from "./SignupPrompt";
 import { trackToolEvent } from "@/lib/tools/event-tracking";
@@ -116,7 +120,8 @@ export function OpenGraphChecker() {
       <ToolHero badge="Free SEO Tool" title="Open Graph Checker" subtitle="Check whether your page has the right Open Graph tags for better social sharing previews." />
       <ToolInput value={url} onChange={setUrl} onSubmit={handleAnalyze} loading={loading} placeholder="https://example.com/page" buttonText="Check OG tags" />
       <SignupPrompt visible={gate?.allowed === true && gate.showSignupPrompt} />
-      {error && <div className="mx-auto max-w-[680px] px-6 py-4"><div className="rounded-xl border border-red-200 bg-red-50/40 px-5 py-3 text-[14px] text-red-700">{error}</div></div>}
+      {loading && <ToolLoading message="Checking Open Graph tags..." />}
+      {error && <ToolError message={error} onRetry={handleAnalyze} />}
 
       {ogTags && analysis && (
         <section className="py-8 md:py-10">
@@ -192,19 +197,9 @@ export function OpenGraphChecker() {
         </section>
       )}
 
-      <section className="py-6"><div className="mx-auto max-w-[680px] px-6">
-        <p className="text-[11px] font-medium uppercase tracking-wide text-muted-light mb-3">Related SEO guides</p>
-        <div className="grid gap-2 sm:grid-cols-2">
-          {[
-            { href: "/seo-guide/on-page-seo/title-tags", label: "Title Tags Explained" },
-            { href: "/seo-guide/seo-analytics/how-to-improve-ctr", label: "How to Improve CTR" },
-            { href: "/seo-guide/on-page-seo/keyword-placement", label: "Keyword Placement Guide" },
-            { href: "/seo-guide/content-seo/seo-introductions", label: "SEO-Friendly Introductions" },
-          ].map((link) => (<a key={link.href} href={link.href} className="flex items-center gap-2 rounded-lg border border-black/[0.04] bg-white px-4 py-3 text-[13px] font-medium text-foreground transition-colors hover:border-accent/30 hover:text-accent"><span className="h-1.5 w-1.5 rounded-full bg-accent" />{link.label}</a>))}
-        </div>
-      </div></section>
-
-      <ToolCTA title="Want Open Graph checks across your site?" description="RankSEO audits meta tags, Open Graph, and social sharing readiness across every page." />
+      <ToolGuides toolId={TOOL_ID} />
+      <ToolRelated currentToolId={TOOL_ID} />
+      <ToolContextCTA toolId={TOOL_ID} />
 
       <ToolFAQ faqs={[
         { question: "What are Open Graph tags?", answer: "Open Graph tags are meta tags that control how your page appears when shared on social platforms like Facebook, LinkedIn, and others. They define the title, description, image, and URL shown in the social preview." },

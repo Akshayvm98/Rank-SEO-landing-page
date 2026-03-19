@@ -4,8 +4,12 @@ import { useState } from "react";
 import { ToolHero } from "./ToolHero";
 import { ToolInput } from "./ToolInput";
 import { ToolResultCard } from "./ToolResultCard";
-import { ToolCTA } from "./ToolCTA";
 import { ToolFAQ } from "./ToolFAQ";
+import { ToolError } from "./ToolError";
+import { ToolLoading } from "./ToolLoading";
+import { ToolRelated } from "./ToolRelated";
+import { ToolGuides } from "./ToolGuides";
+import { ToolContextCTA } from "./ToolContextCTA";
 import { GateModal } from "./GateModal";
 import { SignupPrompt } from "./SignupPrompt";
 import { trackToolEvent } from "@/lib/tools/event-tracking";
@@ -204,13 +208,8 @@ export function HeadingStructureChecker() {
 
       <SignupPrompt visible={gate?.allowed === true && gate.showSignupPrompt} />
 
-      {error && (
-        <div className="mx-auto max-w-[680px] px-6 py-4">
-          <div className="rounded-xl border border-red-200 bg-red-50/40 px-5 py-3 text-[14px] text-red-700">
-            {error}
-          </div>
-        </div>
-      )}
+      {loading && <ToolLoading message="Reviewing heading structure..." />}
+      {error && <ToolError message={error} onRetry={handleAnalyze} />}
 
       {analysis && headings && (
         <section className="py-8 md:py-10">
@@ -356,36 +355,10 @@ export function HeadingStructureChecker() {
         </section>
       )}
 
-      {/* Related guides */}
-      <section className="py-6">
-        <div className="mx-auto max-w-[680px] px-6">
-          <p className="text-[11px] font-medium uppercase tracking-wide text-muted-light mb-3">
-            Related SEO guides
-          </p>
-          <div className="grid gap-2 sm:grid-cols-2">
-            {[
-              { href: "/seo-guide/on-page-seo/headings-seo", label: "Heading Tags Best Practices" },
-              { href: "/seo-guide/content-seo/blog-structure", label: "Blog Structure for SEO" },
-              { href: "/seo-guide/content-seo/content-readability", label: "Content Readability for SEO" },
-              { href: "/seo-guide/on-page-seo/keyword-placement", label: "Keyword Placement Guide" },
-            ].map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="flex items-center gap-2 rounded-lg border border-black/[0.04] bg-white px-4 py-3 text-[13px] font-medium text-foreground transition-colors hover:border-accent/30 hover:text-accent"
-              >
-                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ToolGuides toolId={TOOL_ID} />
+      <ToolRelated currentToolId={TOOL_ID} />
 
-      <ToolCTA
-        title="Want full on-page SEO analysis?"
-        description="RankSEO checks heading structure, content quality, keyword placement, and internal linking across your entire site."
-      />
+      <ToolContextCTA toolId={TOOL_ID} />
 
       <ToolFAQ
         faqs={[

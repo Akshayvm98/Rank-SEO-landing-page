@@ -26,27 +26,29 @@ export function GateModal({ open, onClose }: { open: boolean; onClose: () => voi
             <span className="text-[20px] text-accent">&#x1F512;</span>
           </div>
           <h2 className="mt-4 text-[1.25rem] font-bold text-foreground">
-            Free limit reached
+            You have used your free checks for today
           </h2>
           <p className="mt-2 text-[14px] leading-[1.7] text-muted">
-            You have used your free analyses for today. Create a free account
-            to get unlimited access to all SEO tools.
+            Create an account to keep using all SEO tools with no daily limits.
+            Track your fixes and monitor progress over time.
           </p>
           <div className="mt-6 space-y-3">
-            {/* TODO: Wire to actual auth flow when available */}
             <a
               href="/pricing"
               className="block w-full rounded-xl bg-accent py-3 text-center text-[14px] font-semibold text-white transition-colors hover:bg-accent-hover"
             >
-              Get started free
+              Get unlimited access
             </a>
             <button
               onClick={onClose}
               className="block w-full rounded-xl border border-border py-3 text-center text-[14px] font-semibold text-muted transition-colors hover:bg-border-light"
             >
-              Maybe later
+              Continue browsing
             </button>
           </div>
+          <p className="mt-4 text-[12px] text-muted-light">
+            Built for founders, marketers, and SEO teams.
+          </p>
         </div>
       </div>
     </div>
