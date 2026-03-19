@@ -41,6 +41,18 @@ export const freeTools: ToolMeta[] = [
     href: "/tools/heading-structure-checker",
     published: true,
   },
+  {
+    id: "keyword-density-checker",
+    slug: "keyword-density-checker",
+    name: "Keyword Density Checker",
+    tagline: "Analyze keyword frequency and content balance",
+    description:
+      "Check keyword density, see top terms, and analyze specific keyword usage on any page. Get practical SEO recommendations.",
+    category: "On-Page SEO",
+    icon: "target",
+    href: "/tools/keyword-density-checker",
+    published: true,
+  },
   // Future tools — add entries here as they are built
 ];
 

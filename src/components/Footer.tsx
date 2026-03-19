@@ -30,6 +30,7 @@ const footerLinks = [
       { label: "Content Length Analyzer", href: "/tools/content-length-analyzer" },
       { label: "Meta Tag Checker", href: "/tools/meta-tag-checker" },
       { label: "Heading Checker", href: "/tools/heading-structure-checker" },
+      { label: "Keyword Density", href: "/tools/keyword-density-checker" },
     ],
   },
 ];

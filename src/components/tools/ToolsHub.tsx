@@ -20,10 +20,9 @@ const categories = [
     tools: [
       { id: "meta-tag-checker", live: true },
       { id: "heading-structure-checker", live: true },
+      { id: "keyword-density-checker", live: true },
     ],
-    comingSoon: [
-      { name: "Keyword Density Checker", description: "Analyze keyword usage and avoid over-optimization." },
-    ],
+    comingSoon: [],
   },
   {
     name: "Technical SEO",
