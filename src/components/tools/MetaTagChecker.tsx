@@ -537,10 +537,10 @@ export function MetaTagChecker() {
           </p>
           <div className="grid gap-2 sm:grid-cols-2">
             {[
-              { href: "/seo-guide/on-page-seo/meta-tags-seo", label: "Meta Tags SEO Guide" },
-              { href: "/seo-guide/on-page-seo/title-tag-optimization", label: "Title Tag Optimization" },
-              { href: "/seo-guide/on-page-seo/meta-descriptions", label: "Meta Descriptions Guide" },
-              { href: "/seo-guide/technical-seo/canonical-tags", label: "Canonical Tags Guide" },
+              { href: "/seo-guide/on-page-seo/title-tags", label: "Title Tags Explained" },
+              { href: "/seo-guide/on-page-seo/keyword-placement", label: "Keyword Placement Guide" },
+              { href: "/seo-guide/on-page-seo/headings-seo", label: "Heading Tags Best Practices" },
+              { href: "/seo-guide/content-seo/content-optimization", label: "Content Optimization Guide" },
             ].map((link) => (
               <a
                 key={link.href}
