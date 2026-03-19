@@ -1,11 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { Icon, Icons } from "@/components/ui/Icon";
 import { ToolHero } from "./ToolHero";
 import { ToolInput } from "./ToolInput";
 import { ToolResultCard } from "./ToolResultCard";
 import { ToolCTA } from "./ToolCTA";
 import { ToolFAQ } from "./ToolFAQ";
+import { ToolError } from "./ToolError";
+import { ToolLoading } from "./ToolLoading";
+import { ToolRelated } from "./ToolRelated";
 import { GateModal } from "./GateModal";
 import { SignupPrompt } from "./SignupPrompt";
 import { trackToolEvent } from "@/lib/tools/event-tracking";
@@ -31,45 +35,100 @@ interface AnalysisResult {
   recommendations: string[];
 }
 
-const levelStyles: Record<ReadabilityLevel, { bg: string; text: string; badge: string }> = {
-  "hard to read": { bg: "bg-red-50/40", text: "text-red-700", badge: "bg-red-100 text-red-700" },
-  "needs improvement": { bg: "bg-amber-50/40", text: "text-amber-700", badge: "bg-amber-100 text-amber-700" },
-  "fairly readable": { bg: "bg-blue-50/40", text: "text-blue-700", badge: "bg-blue-100 text-blue-700" },
-  "easy to read": { bg: "bg-emerald-50/40", text: "text-emerald-700", badge: "bg-emerald-100 text-emerald-700" },
+// ---------------------------------------------------------------------------
+// Level styling and humanized descriptions
+// ---------------------------------------------------------------------------
+
+const levelConfig: Record<ReadabilityLevel, {
+  bg: string; text: string; badge: string; border: string;
+  summary: string;
+}> = {
+  "easy to read": {
+    bg: "bg-emerald-50/40", text: "text-emerald-700", badge: "bg-emerald-100 text-emerald-700", border: "border-emerald-200",
+    summary: "Your content is easy to follow. Sentences are clear, paragraphs are well-spaced, and most readers will have no trouble staying engaged.",
+  },
+  "fairly readable": {
+    bg: "bg-blue-50/40", text: "text-blue-700", badge: "bg-blue-100 text-blue-700", border: "border-blue-200",
+    summary: "Most readers will find this content reasonably clear. A few areas could be simplified to improve flow and scannability.",
+  },
+  "needs improvement": {
+    bg: "bg-amber-50/40", text: "text-amber-700", badge: "bg-amber-100 text-amber-700", border: "border-amber-200",
+    summary: "Some parts of this content may feel heavy or hard to follow. Shorter sentences and better-spaced paragraphs would help readers stay engaged.",
+  },
+  "hard to read": {
+    bg: "bg-red-50/40", text: "text-red-700", badge: "bg-red-100 text-red-700", border: "border-red-200",
+    summary: "This content is difficult to read for most audiences. Long sentences, dense paragraphs, or missing structure are creating friction. Simplifying would significantly improve engagement.",
+  },
 };
 
-const levelBorders: Record<ReadabilityLevel, string> = {
-  "hard to read": "border-red-200",
-  "needs improvement": "border-amber-200",
-  "fairly readable": "border-blue-200",
-  "easy to read": "border-emerald-200",
-};
+// ---------------------------------------------------------------------------
+// Complexity signals (deterministic)
+// ---------------------------------------------------------------------------
 
-function sentenceLengthLabel(avg: number): string {
-  if (avg <= 14) return "Short (easy)";
-  if (avg <= 20) return "Good";
-  if (avg <= 28) return "Long";
-  return "Very long";
+interface Signal {
+  status: "good" | "warning";
+  label: string;
+  detail: string;
 }
 
-function sentenceLengthColor(avg: number): string {
-  if (avg <= 14) return "bg-emerald-100 text-emerald-700";
-  if (avg <= 20) return "bg-emerald-100 text-emerald-700";
-  if (avg <= 28) return "bg-amber-100 text-amber-700";
-  return "bg-red-100 text-red-700";
+function getComplexitySignals(result: AnalysisResult): Signal[] {
+  const signals: Signal[] = [];
+  const { sentenceMetrics: sm, paragraphMetrics: pm, headingCount, totalWords } = result;
+
+  // Sentence length
+  if (sm.averageWordsPerSentence <= 20) {
+    signals.push({ status: "good", label: "Sentence length", detail: `${sm.averageWordsPerSentence} words per sentence on average. Most readers will find this comfortable.` });
+  } else if (sm.averageWordsPerSentence <= 28) {
+    signals.push({ status: "warning", label: "Sentence length", detail: `${sm.averageWordsPerSentence} words per sentence on average. Some readers may struggle to follow longer sentences.` });
+  } else {
+    signals.push({ status: "warning", label: "Sentence length", detail: `${sm.averageWordsPerSentence} words per sentence on average. This is quite long. Breaking sentences apart would help a lot.` });
+  }
+
+  // Long sentences
+  if (sm.longSentences > 0) {
+    if (sm.longSentencePercent > 30) {
+      signals.push({ status: "warning", label: "Long sentences", detail: `${sm.longSentencePercent}% of sentences are 25+ words. That is a lot of dense reading. Try to keep this under 20%.` });
+    } else if (sm.longSentencePercent > 15) {
+      signals.push({ status: "warning", label: "Long sentences", detail: `${sm.longSentencePercent}% of sentences are on the long side. Shortening a few would improve clarity.` });
+    }
+  } else if (sm.totalSentences > 5) {
+    signals.push({ status: "good", label: "Sentence variety", detail: "No excessively long sentences found. Your writing flows well." });
+  }
+
+  // Paragraph density
+  if (pm.averageSentencesPerParagraph <= 4) {
+    signals.push({ status: "good", label: "Paragraph spacing", detail: "Paragraphs are well-spaced. Easy to scan on any device." });
+  } else if (pm.averageSentencesPerParagraph <= 6) {
+    signals.push({ status: "warning", label: "Paragraph spacing", detail: "Some paragraphs are a bit dense. Splitting them would improve scannability, especially on mobile." });
+  } else {
+    signals.push({ status: "warning", label: "Paragraph spacing", detail: "Paragraphs are very dense. Most web readers prefer 2 to 4 sentences per paragraph." });
+  }
+
+  // Dense paragraphs
+  if (pm.denseParagraphs > 0) {
+    signals.push({ status: "warning", label: "Dense blocks", detail: `${pm.denseParagraphs} paragraph${pm.denseParagraphs !== 1 ? "s have" : " has"} 6 or more sentences. These sections probably need breaking up.` });
+  }
+
+  // Heading coverage
+  if (totalWords > 500) {
+    if (headingCount === 0) {
+      signals.push({ status: "warning", label: "No headings", detail: "Content has no headings at all. Adding H2 and H3 tags would make it much easier to navigate." });
+    } else {
+      const ratio = totalWords / headingCount;
+      if (ratio > 500) {
+        signals.push({ status: "warning", label: "Few headings", detail: "There are very few headings for this content length. Adding more would improve structure." });
+      } else {
+        signals.push({ status: "good", label: "Heading structure", detail: "Headings break the content into scannable sections." });
+      }
+    }
+  }
+
+  return signals;
 }
 
-function paragraphDensityLabel(avg: number): string {
-  if (avg <= 3) return "Easy to scan";
-  if (avg <= 5) return "Acceptable";
-  return "Dense";
-}
-
-function paragraphDensityColor(avg: number): string {
-  if (avg <= 3) return "bg-emerald-100 text-emerald-700";
-  if (avg <= 5) return "bg-blue-100 text-blue-700";
-  return "bg-amber-100 text-amber-700";
-}
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
 
 export function ReadabilityChecker() {
   const [url, setUrl] = useState("");
@@ -81,7 +140,6 @@ export function ReadabilityChecker() {
 
   async function handleAnalyze() {
     if (!url.trim()) return;
-
     setLoading(true);
     setError(null);
     setResult(null);
@@ -122,12 +180,15 @@ export function ReadabilityChecker() {
     }
   }
 
+  const config = result ? (levelConfig[result.level] ?? levelConfig["needs improvement"]) : null;
+  const signals = result ? getComplexitySignals(result) : [];
+
   return (
     <>
       <ToolHero
         badge="Free SEO Tool"
         title="Readability Checker"
-        subtitle="Analyze sentence length, paragraph structure, and content clarity for better SEO and user experience."
+        subtitle="See how easy your content is to read. Get clarity scores, sentence and paragraph analysis, and practical tips to make your writing more engaging."
       />
 
       <ToolInput
@@ -135,21 +196,18 @@ export function ReadabilityChecker() {
         onChange={setUrl}
         onSubmit={handleAnalyze}
         loading={loading}
+        loadingMessage="Checking readability..."
         placeholder="https://example.com/blog-post"
         buttonText="Check readability"
       />
 
       <SignupPrompt visible={gate?.allowed === true && gate.showSignupPrompt} />
 
-      {error && (
-        <div className="mx-auto max-w-[680px] px-6 py-4">
-          <div className="rounded-xl border border-red-200 bg-red-50/40 px-5 py-3 text-[14px] text-red-700">
-            {error}
-          </div>
-        </div>
-      )}
+      {loading && <ToolLoading message="Analyzing content readability..." />}
 
-      {result && (
+      {error && <ToolError message={error} onRetry={handleAnalyze} />}
+
+      {result && config && (
         <section className="py-8 md:py-10">
           <div className="mx-auto max-w-[880px] px-6">
             {/* Page info */}
@@ -163,132 +221,179 @@ export function ReadabilityChecker() {
               <p className="mt-0.5 text-[13px] text-muted truncate">{result.url}</p>
             </div>
 
-            {/* Overview cards */}
-            <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
-              <ToolResultCard label="Words" value={result.totalWords.toLocaleString()} />
-              <ToolResultCard label="Sentences" value={result.sentenceMetrics.totalSentences} />
-              <ToolResultCard label="Paragraphs" value={result.paragraphMetrics.totalParagraphs} />
-              <ToolResultCard label="Headings" value={result.headingCount} />
-              <ToolResultCard label="Reading time" value={`${result.readingTimeMinutes} min`} />
-            </div>
-
-            {/* Readability score */}
-            <div className={`mt-6 rounded-2xl border p-6 ${levelStyles[result.level].bg} ${levelBorders[result.level]}`}>
-              <div className="flex items-center gap-3">
-                <span className={`inline-block rounded-full px-3 py-1 text-[12px] font-bold uppercase tracking-wide ${levelStyles[result.level].badge}`}>
-                  {result.level}
-                </span>
-                <span className={`text-[14px] font-semibold ${levelStyles[result.level].text}`}>
-                  Readability level
-                </span>
-              </div>
-              <p className={`mt-2 text-[13px] leading-[1.6] ${levelStyles[result.level].text}`}>
-                {result.level === "easy to read" && "This content is well-structured and easy to follow. Sentence and paragraph lengths are within good ranges for most readers."}
-                {result.level === "fairly readable" && "This content is reasonably readable with some areas that could be improved for better scannability and clarity."}
-                {result.level === "needs improvement" && "This content has readability issues that may cause readers to disengage. Consider improving sentence length and paragraph structure."}
-                {result.level === "hard to read" && "This content is difficult to read. Long sentences, dense paragraphs, or missing structure make it hard for readers to stay engaged."}
+            {/* ── Overview ── */}
+            <div className="mb-8">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-light mb-3">
+                Overview
               </p>
-            </div>
-
-            {/* Detailed metrics */}
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {/* Sentence length */}
-              <div className="rounded-xl border border-black/[0.04] bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
-                <p className="text-[11px] font-medium uppercase tracking-wide text-muted-light mb-3">
-                  Sentence length
-                </p>
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-[22px] font-bold text-foreground">
-                    {result.sentenceMetrics.averageWordsPerSentence}
-                  </span>
-                  <span className="text-[13px] text-muted">words/sentence avg</span>
-                </div>
-                <span className={`inline-block rounded-full px-2.5 py-0.5 text-[11px] font-bold ${sentenceLengthColor(result.sentenceMetrics.averageWordsPerSentence)}`}>
-                  {sentenceLengthLabel(result.sentenceMetrics.averageWordsPerSentence)}
-                </span>
-                {result.sentenceMetrics.longSentences > 0 && (
-                  <p className="mt-2 text-[12px] text-muted">
-                    {result.sentenceMetrics.longSentences} long sentence{result.sentenceMetrics.longSentences !== 1 ? "s" : ""} ({result.sentenceMetrics.longSentencePercent}% of total)
-                  </p>
-                )}
-              </div>
-
-              {/* Paragraph density */}
-              <div className="rounded-xl border border-black/[0.04] bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
-                <p className="text-[11px] font-medium uppercase tracking-wide text-muted-light mb-3">
-                  Paragraph density
-                </p>
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-[22px] font-bold text-foreground">
-                    {result.paragraphMetrics.averageSentencesPerParagraph}
-                  </span>
-                  <span className="text-[13px] text-muted">sentences/paragraph avg</span>
-                </div>
-                <span className={`inline-block rounded-full px-2.5 py-0.5 text-[11px] font-bold ${paragraphDensityColor(result.paragraphMetrics.averageSentencesPerParagraph)}`}>
-                  {paragraphDensityLabel(result.paragraphMetrics.averageSentencesPerParagraph)}
-                </span>
-                {result.paragraphMetrics.denseParagraphs > 0 && (
-                  <p className="mt-2 text-[12px] text-muted">
-                    {result.paragraphMetrics.denseParagraphs} dense paragraph{result.paragraphMetrics.denseParagraphs !== 1 ? "s" : ""} (6+ sentences)
-                  </p>
-                )}
+              <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+                <ToolResultCard label="Words" value={result.totalWords.toLocaleString()} />
+                <ToolResultCard label="Sentences" value={result.sentenceMetrics.totalSentences} />
+                <ToolResultCard label="Paragraphs" value={result.paragraphMetrics.totalParagraphs} />
+                <ToolResultCard label="Headings" value={result.headingCount} />
+                <ToolResultCard label="Reading time" value={`${result.readingTimeMinutes} min`} />
               </div>
             </div>
 
-            {/* Insights */}
-            {result.insights.length > 0 && (
-              <div className="mt-6 rounded-xl border border-blue-200 bg-blue-50/30 p-5">
-                <p className="text-[11px] font-medium uppercase tracking-wide text-blue-600 mb-3">
-                  Insights
+            {/* ── Readability score ── */}
+            <div className="mb-8">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-light mb-3">
+                Readability level
+              </p>
+              <div className={`rounded-2xl border p-6 ${config.bg} ${config.border}`}>
+                <div className="flex items-center gap-3">
+                  <span className={`inline-block rounded-full px-3 py-1 text-[12px] font-bold uppercase tracking-wide ${config.badge}`}>
+                    {result.level}
+                  </span>
+                </div>
+                <p className={`mt-3 text-[14px] leading-[1.7] font-medium ${config.text}`}>
+                  {config.summary}
                 </p>
-                <ul className="space-y-2">
-                  {result.insights.map((ins, i) => (
-                    <li key={i} className="flex items-start gap-2 text-[13px] text-blue-800 leading-[1.6]">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-400" />
-                      {ins}
-                    </li>
+              </div>
+            </div>
+
+            {/* ── Sentence & paragraph analysis ── */}
+            <div className="mb-8">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-light mb-3">
+                Writing analysis
+              </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {/* Sentences */}
+                <div className="rounded-xl border border-black/[0.04] bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+                  <p className="text-[11px] font-medium uppercase tracking-wide text-muted-light mb-3">
+                    Sentences
+                  </p>
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="text-[28px] font-bold text-foreground">
+                      {result.sentenceMetrics.averageWordsPerSentence}
+                    </span>
+                    <span className="text-[13px] text-muted">words per sentence</span>
+                  </div>
+                  <span className={`inline-block rounded-full px-2.5 py-0.5 text-[11px] font-bold ${
+                    result.sentenceMetrics.averageWordsPerSentence <= 20
+                      ? "bg-emerald-100 text-emerald-700"
+                      : result.sentenceMetrics.averageWordsPerSentence <= 28
+                      ? "bg-amber-100 text-amber-700"
+                      : "bg-red-100 text-red-700"
+                  }`}>
+                    {result.sentenceMetrics.averageWordsPerSentence <= 14 ? "Short and clear" :
+                     result.sentenceMetrics.averageWordsPerSentence <= 20 ? "Good length" :
+                     result.sentenceMetrics.averageWordsPerSentence <= 28 ? "A bit long" : "Very long"}
+                  </span>
+                  {result.sentenceMetrics.longSentences > 0 && (
+                    <p className="mt-3 text-[12px] text-muted">
+                      {result.sentenceMetrics.longSentences} sentence{result.sentenceMetrics.longSentences !== 1 ? "s are" : " is"} over 25 words ({result.sentenceMetrics.longSentencePercent}%)
+                    </p>
+                  )}
+                </div>
+
+                {/* Paragraphs */}
+                <div className="rounded-xl border border-black/[0.04] bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+                  <p className="text-[11px] font-medium uppercase tracking-wide text-muted-light mb-3">
+                    Paragraphs
+                  </p>
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="text-[28px] font-bold text-foreground">
+                      {result.paragraphMetrics.averageSentencesPerParagraph}
+                    </span>
+                    <span className="text-[13px] text-muted">sentences per paragraph</span>
+                  </div>
+                  <span className={`inline-block rounded-full px-2.5 py-0.5 text-[11px] font-bold ${
+                    result.paragraphMetrics.averageSentencesPerParagraph <= 4
+                      ? "bg-emerald-100 text-emerald-700"
+                      : result.paragraphMetrics.averageSentencesPerParagraph <= 6
+                      ? "bg-blue-100 text-blue-700"
+                      : "bg-amber-100 text-amber-700"
+                  }`}>
+                    {result.paragraphMetrics.averageSentencesPerParagraph <= 3 ? "Easy to scan" :
+                     result.paragraphMetrics.averageSentencesPerParagraph <= 5 ? "Reasonable" : "Dense"}
+                  </span>
+                  {result.paragraphMetrics.denseParagraphs > 0 && (
+                    <p className="mt-3 text-[12px] text-muted">
+                      {result.paragraphMetrics.denseParagraphs} dense paragraph{result.paragraphMetrics.denseParagraphs !== 1 ? "s" : ""} (6+ sentences each)
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* ── Complexity signals ── */}
+            {signals.length > 0 && (
+              <div className="mb-8">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-light mb-3">
+                  What we found
+                </p>
+                <div className="space-y-2">
+                  {signals.map((signal, i) => (
+                    <div
+                      key={i}
+                      className={`flex items-start gap-3 rounded-xl border px-5 py-3.5 ${
+                        signal.status === "good"
+                          ? "border-emerald-200 bg-emerald-50/30"
+                          : "border-amber-200 bg-amber-50/30"
+                      }`}
+                    >
+                      <Icon
+                        icon={signal.status === "good" ? Icons.checkCircle : Icons.alertTriangle}
+                        size="sm"
+                        className={`mt-0.5 shrink-0 ${signal.status === "good" ? "text-emerald-500" : "text-amber-500"}`}
+                      />
+                      <div>
+                        <p className={`text-[13px] font-semibold ${signal.status === "good" ? "text-emerald-700" : "text-amber-700"}`}>
+                          {signal.label}
+                        </p>
+                        <p className={`mt-0.5 text-[13px] leading-[1.6] ${signal.status === "good" ? "text-emerald-600" : "text-amber-600"}`}>
+                          {signal.detail}
+                        </p>
+                      </div>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             )}
 
-            {/* Recommendations */}
-            {result.recommendations.length > 0 && (
-              <div className="mt-6 rounded-xl border border-accent/20 bg-accent-bg/20 p-5">
-                <p className="text-[11px] font-medium uppercase tracking-wide text-accent mb-3">
-                  Recommendations
+            {/* ── Recommendations ── */}
+            {(result.recommendations ?? []).length > 0 && (
+              <div className="mb-8">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-accent mb-3">
+                  How to improve
                 </p>
-                <ul className="space-y-2">
-                  {result.recommendations.map((rec, i) => (
-                    <li key={i} className="flex items-start gap-2 text-[13px] text-foreground leading-[1.6]">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                      {rec}
-                    </li>
-                  ))}
-                </ul>
+                <div className="rounded-xl border border-accent/20 bg-accent-bg/20 p-5">
+                  <ul className="space-y-2.5">
+                    {(result.recommendations ?? []).map((rec, i) => (
+                      <li key={i} className="flex items-start gap-2.5 text-[13px] text-foreground leading-[1.6]">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                        {rec}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             )}
           </div>
         </section>
       )}
 
-      {/* Related guides */}
+      {/* ── Related guides ── */}
       <section className="py-6">
         <div className="mx-auto max-w-[680px] px-6">
-          <p className="text-[11px] font-medium uppercase tracking-wide text-muted-light mb-3">
-            Related SEO guides
+          <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-light mb-1">
+            Make your content easier to read
+          </p>
+          <p className="text-[13px] text-muted mb-3">
+            These guides explain how to improve clarity and engagement.
           </p>
           <div className="grid gap-2 sm:grid-cols-2">
             {[
-              { href: "/seo-guide/content-seo/content-readability", label: "Content Readability for SEO" },
+              { href: "/seo-guide/content-seo/content-readability", label: "Content Readability Guide" },
               { href: "/seo-guide/content-seo/blog-structure", label: "Blog Structure for SEO" },
               { href: "/seo-guide/on-page-seo/headings-seo", label: "Heading Tags Best Practices" },
-              { href: "/seo-guide/content-seo/seo-introductions", label: "SEO-Friendly Introductions" },
+              { href: "/seo-guide/content-seo/how-to-write-seo-articles", label: "How to Write SEO Articles" },
             ].map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="flex items-center gap-2 rounded-lg border border-black/[0.04] bg-white px-4 py-3 text-[13px] font-medium text-foreground transition-colors hover:border-accent/30 hover:text-accent"
+                className="group flex items-center gap-2 rounded-lg border border-black/[0.04] bg-white px-4 py-3 text-[13px] font-medium text-foreground transition-all hover:border-accent/30 hover:text-accent hover:shadow-sm"
               >
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                 {link.label}
@@ -298,37 +403,39 @@ export function ReadabilityChecker() {
         </div>
       </section>
 
+      <ToolRelated currentToolId={TOOL_ID} />
+
       <ToolCTA
-        title="Want readability analysis across your entire site?"
-        description="RankSEO checks readability, content structure, and engagement signals across every page on your site."
+        title="Want readability checks across your entire site?"
+        description="RankSEO analyzes readability, content structure, and engagement signals on every page. Find the content that is losing readers before it loses rankings."
       />
 
       <ToolFAQ
         faqs={[
           {
-            question: "What is readability in SEO?",
+            question: "What does this readability checker analyze?",
             answer:
-              "Readability refers to how easy your content is to read and understand. In SEO, it affects user engagement metrics like time on page and bounce rate. Content that is easy to read keeps visitors engaged, which indirectly supports better rankings.",
+              "It fetches any public web page and analyzes sentence length, paragraph density, heading structure, and overall content flow. Then it gives you a readability level and practical suggestions to improve clarity.",
           },
           {
-            question: "Does readability directly affect rankings?",
+            question: "Does readability affect SEO rankings?",
             answer:
-              "Readability is not a direct ranking factor in Google's algorithm. However, it strongly influences user engagement signals that do affect rankings. Readable content gets lower bounce rates, higher time on page, and fewer users returning to search results.",
+              "Not directly. Google does not have a readability ranking factor. But readable content keeps readers engaged longer, reduces bounce rates, and improves time on page. Those engagement signals do influence how Google perceives content quality.",
           },
           {
             question: "What is a good readability score?",
             answer:
-              "For web content, aim for short sentences (15 to 20 words average), short paragraphs (2 to 4 sentences), and clear headings. Most readers prefer content written at an 8th to 9th grade level, even on technical topics.",
+              "For web content, aim for sentences averaging 15 to 20 words, paragraphs of 2 to 4 sentences, and clear headings every 200 to 300 words. Most audiences prefer content that is easy to scan, even on technical topics.",
           },
           {
             question: "How do I make content easier to read?",
             answer:
-              "Use shorter sentences, break long paragraphs into smaller chunks, add headings every 200 to 300 words, use bullet points for lists, and avoid unnecessary jargon. Read your content out loud to catch awkward phrasing.",
+              "Shorten long sentences, break dense paragraphs into smaller chunks, add more headings, and use lists where they make sense. Reading your content out loud is one of the simplest ways to catch awkward phrasing.",
           },
           {
-            question: "Are short paragraphs better for SEO?",
+            question: "Can I use this on any website?",
             answer:
-              "Short paragraphs (2 to 4 sentences) are better for web readability, which supports SEO indirectly. On screens, especially mobile, short paragraphs create visual breathing room and make content easier to scan.",
+              "You can analyze any publicly accessible web page. The tool fetches the page the same way a search engine would. Private or login-protected pages cannot be analyzed.",
           },
         ]}
       />
