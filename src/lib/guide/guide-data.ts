@@ -577,6 +577,58 @@ const articles: GuideArticlePage[] = [
     relatedIds: ["on-page-seo", "internal-linking-best-practices", "internal-linking", "keyword-placement", "blog-structure"],
   },
   {
+    id: "internal-link-audit",
+    type: "article",
+    title: "How to Audit Internal Links for SEO",
+    slug: "internal-link-audit",
+    topicSlug: "on-page-seo",
+    excerpt:
+      "Learn how to audit internal links for SEO. Find broken links, orphan pages, and improve your site structure.",
+    category: "On-Page",
+    order: 3.8,
+    published: true,
+    lastUpdated: "2026-03-19",
+    readingTime: 10,
+    seoTitle:
+      "How to Audit Internal Links for SEO (Step-by-Step Guide)",
+    seoDescription:
+      "Learn how to audit internal links for SEO. Find broken links, orphan pages, and improve your site structure step by step.",
+    ogTitle: "Internal Link Audit Guide | RankSEO",
+    ogDescription:
+      "Audit your internal links to find broken connections, orphan pages, and missed SEO opportunities.",
+    ogImage: "/og-image.png",
+    twitterTitle: "Internal Link Audit | RankSEO",
+    twitterDescription:
+      "Step-by-step guide to auditing internal links and improving your site structure for SEO.",
+    relatedIds: ["on-page-seo", "internal-linking-best-practices", "anchor-text-best-practices", "internal-linking", "why-pages-are-not-indexed"],
+  },
+  {
+    id: "internal-links-per-page",
+    type: "article",
+    title: "How Many Internal Links Per Page for SEO",
+    slug: "internal-links-per-page",
+    topicSlug: "on-page-seo",
+    excerpt:
+      "How many internal links should a page have? Learn the right balance to improve SEO without overlinking.",
+    category: "On-Page",
+    order: 3.9,
+    published: true,
+    lastUpdated: "2026-03-19",
+    readingTime: 9,
+    seoTitle:
+      "How Many Internal Links Per Page for SEO (Practical Guide)",
+    seoDescription:
+      "How many internal links should a page have? Learn the right balance to improve SEO without overlinking.",
+    ogTitle: "Internal Links Per Page | RankSEO",
+    ogDescription:
+      "Learn how many internal links a page should have for optimal SEO performance.",
+    ogImage: "/og-image.png",
+    twitterTitle: "Internal Links Per Page | RankSEO",
+    twitterDescription:
+      "How many internal links should a page have? Practical guidelines for better SEO.",
+    relatedIds: ["on-page-seo", "internal-linking-best-practices", "internal-link-audit", "anchor-text-best-practices", "blog-structure"],
+  },
+  {
     id: "how-to-find-low-competition-keywords",
     type: "article",
     title: "How to Find Low Competition Keywords",
