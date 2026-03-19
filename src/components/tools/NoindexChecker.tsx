@@ -84,7 +84,7 @@ export function NoindexChecker() {
               <ToolResultCard label="Indexable" value={result.indexable ? "Yes" : "No"} />
               <ToolResultCard label="Has noindex" value={result.hasNoindex ? "Yes" : "No"} />
               <ToolResultCard label="Has nofollow" value={result.hasNofollow ? "Yes" : "No"} />
-              <ToolResultCard label="Directives" value={result.allDirectives.length} note={result.allDirectives.length > 0 ? result.allDirectives.join(", ") : "none"} />
+              <ToolResultCard label="Directives" value={(result.allDirectives ?? []).length} note={(result.allDirectives ?? []).length > 0 ? (result.allDirectives ?? []).join(", ") : "none"} />
             </div>
 
             {/* Indexability verdict */}
@@ -100,10 +100,10 @@ export function NoindexChecker() {
             </div>
 
             {/* Directive sources */}
-            {(result.metaRobotsTags.length > 0 || result.xRobotsHeader) && (
+            {((result.metaRobotsTags ?? []).length > 0 || result.xRobotsHeader) && (
               <div className="mt-6 rounded-xl border border-black/[0.04] bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
                 <p className="text-[11px] font-medium uppercase tracking-wide text-muted-light mb-3">Directive sources</p>
-                {result.metaRobotsTags.map((tag, i) => (
+                {(result.metaRobotsTags ?? []).map((tag, i) => (
                   <div key={i} className="mb-2 rounded-lg border border-border-light p-3">
                     <p className="text-[12px] font-semibold text-muted">&lt;meta name=&quot;{tag.name}&quot;&gt;</p>
                     <p className="text-[13px] font-mono text-foreground">{tag.content}</p>

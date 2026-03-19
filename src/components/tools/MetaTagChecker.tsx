@@ -304,9 +304,30 @@ export function MetaTagChecker() {
         throw new Error(data.error || "Analysis failed");
       }
 
-      setResult(data.data);
+      // Normalize response to ensure all fields have safe defaults
+      const d = data.data;
+      const defaultAssessment = { length: 0, status: "missing" as const, label: "Missing", color: "red", recommendation: "" };
+      setResult({
+        url: d.url ?? "",
+        title: {
+          value: d.title?.value ?? (typeof d.title === "string" ? d.title : ""),
+          assessment: d.title?.assessment ?? defaultAssessment,
+        },
+        description: {
+          value: d.description?.value ?? (typeof d.description === "string" ? d.description : ""),
+          assessment: d.description?.assessment ?? defaultAssessment,
+        },
+        canonical: d.canonical ?? null,
+        robots: d.robots ?? null,
+        viewport: d.viewport ?? null,
+        charset: d.charset ?? null,
+        openGraph: d.openGraph ?? {},
+        twitterCard: d.twitterCard ?? {},
+        otherMeta: Array.isArray(d.otherMeta) ? d.otherMeta : [],
+        totalTagCount: d.totalTagCount ?? 0,
+      });
       setGate(data.gate);
-      trackToolEvent("analysis_completed", { toolId: TOOL_ID, tagCount: data.data.totalTagCount });
+      trackToolEvent("analysis_completed", { toolId: TOOL_ID, tagCount: d.totalTagCount ?? 0 });
 
       if (data.gate?.showSignupPrompt) {
         trackToolEvent("signup_prompt_shown", { toolId: TOOL_ID });

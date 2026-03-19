@@ -8,6 +8,7 @@ export function ToolInput({
   onChange,
   onSubmit,
   loading,
+  loadingMessage = "Analyzing...",
   placeholder = "https://example.com/page",
   buttonText = "Analyze",
 }: {
@@ -15,6 +16,7 @@ export function ToolInput({
   onChange: (value: string) => void;
   onSubmit: () => void;
   loading: boolean;
+  loadingMessage?: string;
   placeholder?: string;
   buttonText?: string;
 }) {
@@ -40,18 +42,18 @@ export function ToolInput({
               onChange={(e) => onChange(e.target.value)}
               placeholder={placeholder}
               required
-              className="w-full rounded-xl border border-border bg-white py-3.5 pl-11 pr-4 text-[14px] text-foreground placeholder:text-muted-light outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/20"
+              className="w-full rounded-xl border border-border bg-white py-3.5 pl-11 pr-4 text-[14px] text-foreground placeholder:text-muted-light outline-none transition-all focus:border-accent focus:ring-2 focus:ring-accent/20 focus:shadow-[0_0_0_4px_rgba(13,148,136,0.06)]"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-[14px] font-semibold text-white shadow-sm transition-all hover:bg-accent-hover disabled:opacity-60 disabled:cursor-not-allowed"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-[14px] font-semibold text-white shadow-sm transition-all hover:bg-accent-hover hover:shadow-md disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {loading ? (
               <>
                 <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                Analyzing...
+                {loadingMessage}
               </>
             ) : (
               <>

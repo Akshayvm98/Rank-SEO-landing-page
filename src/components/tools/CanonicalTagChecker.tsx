@@ -181,9 +181,9 @@ export function CanonicalTagChecker() {
             </div>
 
             {/* Status card */}
-            <div className={`mt-6 rounded-2xl border p-6 ${statusStyles[result.status].bg.replace("100", "50/40")} border-${result.status === "self-referencing" ? "emerald" : result.status === "different page" ? "blue" : result.status === "cross-domain" ? "amber" : "red"}-200`}>
+            <div className={`mt-6 rounded-2xl border p-6 ${result.status === "self-referencing" ? "bg-emerald-50/40 border-emerald-200" : result.status === "different page" ? "bg-blue-50/40 border-blue-200" : result.status === "cross-domain" ? "bg-amber-50/40 border-amber-200" : "bg-red-50/40 border-red-200"}`}>
               <div className="flex items-center gap-3">
-                <span className={`inline-block rounded-full px-3 py-1 text-[12px] font-bold uppercase tracking-wide ${statusStyles[result.status].bg} ${statusStyles[result.status].text}`}>
+                <span className={`inline-block rounded-full px-3 py-1 text-[12px] font-bold uppercase tracking-wide ${(statusStyles[result.status] ?? { bg: "bg-gray-100", text: "text-gray-700" }).bg} ${(statusStyles[result.status] ?? { bg: "bg-gray-100", text: "text-gray-700" }).text}`}>
                   {result.status}
                 </span>
               </div>

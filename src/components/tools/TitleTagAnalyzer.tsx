@@ -58,7 +58,10 @@ export function TitleTagAnalyzer() {
         if (res.status === 429) { setGate(data.gate); setShowGateModal(true); return; }
         return;
       }
-      if (data.data.title) setTitleInput(data.data.title);
+      // title may be string or { value: string, assessment: object }
+      const rawTitle = data.data.title;
+      const titleStr = typeof rawTitle === "string" ? rawTitle : rawTitle?.value ?? "";
+      if (titleStr) setTitleInput(titleStr);
       setGate(data.gate);
     } catch { /* silent */ } finally { setFetchLoading(false); }
   }

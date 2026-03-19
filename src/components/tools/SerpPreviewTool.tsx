@@ -67,8 +67,14 @@ export function SerpPreviewTool() {
       }
 
       // Populate fields from fetched data
-      if (data.data.title) setTitle(data.data.title);
-      if (data.data.metaDescription) setDescription(data.data.metaDescription);
+      // title may be string or { value: string, assessment: object }
+      const rawTitle = data.data.title;
+      const titleStr = typeof rawTitle === "string" ? rawTitle : rawTitle?.value ?? "";
+      if (titleStr) setTitle(titleStr);
+      // description may be string or { value: string, assessment: object }
+      const rawDesc = data.data.description ?? data.data.metaDescription;
+      const descStr = typeof rawDesc === "string" ? rawDesc : rawDesc?.value ?? "";
+      if (descStr) setDescription(descStr);
       setUrl(fetchUrl.trim());
       setGate(data.gate);
       trackToolEvent("analysis_completed", { toolId: TOOL_ID });
