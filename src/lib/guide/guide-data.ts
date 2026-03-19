@@ -1122,6 +1122,58 @@ const articles: GuideArticlePage[] = [
       "Fix the 'Discovered, currently not indexed' status in Google Search Console with this step-by-step guide.",
     relatedIds: ["technical-seo", "why-pages-are-not-indexed", "robots-txt-guide", "internal-linking", "new-website-no-traffic"],
   },
+  {
+    id: "how-long-to-index",
+    type: "article",
+    title: "How Long Does Google Take to Index a Page",
+    slug: "how-long-to-index",
+    topicSlug: "technical-seo",
+    excerpt:
+      "Learn how long Google takes to index a new page and what you can do to speed up the process.",
+    category: "On-Page",
+    order: 4.7,
+    published: true,
+    lastUpdated: "2026-03-19",
+    readingTime: 9,
+    seoTitle:
+      "How Long Does Google Take to Index a Page? Realistic Timelines",
+    seoDescription:
+      "How long does Google take to index a page? Learn realistic timelines by site type and how to speed up indexing.",
+    ogTitle: "How Long to Index a Page | RankSEO",
+    ogDescription:
+      "Realistic indexing timelines and how to get your pages indexed faster by Google.",
+    ogImage: "/og-image.png",
+    twitterTitle: "How Long to Index | RankSEO",
+    twitterDescription:
+      "How long does Google take to index a page? Realistic timelines and tips to speed it up.",
+    relatedIds: ["technical-seo", "why-pages-are-not-indexed", "discovered-not-indexed", "new-website-no-traffic", "internal-linking"],
+  },
+  {
+    id: "keywords-for-new-website",
+    type: "article",
+    title: "How to Find Keywords for a New Website",
+    slug: "keywords-for-new-website",
+    topicSlug: "keyword-research",
+    excerpt:
+      "Learn how to find the right keywords for a new website so you can start ranking and building traffic from day one.",
+    category: "Keyword Research",
+    order: 1.96,
+    published: true,
+    lastUpdated: "2026-03-19",
+    readingTime: 10,
+    seoTitle:
+      "How to Find Keywords for a New Website (Step-by-Step)",
+    seoDescription:
+      "New website? Learn how to find keywords you can actually rank for with a step-by-step keyword research process for beginners.",
+    ogTitle: "Keywords for a New Website | RankSEO",
+    ogDescription:
+      "Find the right keywords for a new website with this step-by-step guide.",
+    ogImage: "/og-image.png",
+    twitterTitle: "Keywords for New Websites | RankSEO",
+    twitterDescription:
+      "How to find keywords a new website can actually rank for. Step-by-step guide.",
+    relatedIds: ["keyword-research", "how-to-find-low-competition-keywords", "short-vs-long-tail-keywords", "keyword-prioritization", "new-website-no-traffic"],
+  },
 ];
 
 // ---------------------------------------------------------------------------
