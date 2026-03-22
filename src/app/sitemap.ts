@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getGuideSitemapEntries } from "@/lib/guide";
+import { getPublishedTools } from "@/lib/tools/tools-data";
 
 const siteUrl = "https://rankseoengine.com";
 
@@ -89,6 +90,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.3,
     },
+    {
+      url: `${siteUrl}/careers`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    // Tools hub + all tool pages — auto-generated from tools registry
+    {
+      url: `${siteUrl}/tools`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    ...getPublishedTools().map((tool) => ({
+      url: `${siteUrl}${tool.href}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
     // SEO Guide pages — auto-generated from guide data registry
     ...getGuideSitemapEntries(),
   ];
